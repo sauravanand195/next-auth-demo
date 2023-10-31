@@ -1,7 +1,7 @@
 "use client"
 import React, { useState } from 'react'
 import { signUp } from '../actions/users/signUp'
-import { Avatar, Button, CssBaseline, TextField, Link, Grid, Box, Typography, Container } from '@mui/material/Avatar';
+import { Avatar, Button, CssBaseline, TextField, Link, Grid, Box, Typography, Container } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import AlertComp from './AlertComp';
 import { useRouter } from 'next/navigation';
