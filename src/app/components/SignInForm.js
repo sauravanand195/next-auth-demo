@@ -27,6 +27,7 @@ const SignInForm = () => {
                 password,
                 redirect: false,
             })
+            console.log('signInResponse >>>> ', signInResponse);
             if (!signInResponse || signInResponse.ok !== true) {
                 setSnack(true)
             } else {

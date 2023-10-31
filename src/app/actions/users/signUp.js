@@ -2,7 +2,7 @@
 import prisma from "@/app/lib/prisma"
 import bcrypt from 'bcryptjs'
 
-export const signUp = async (email, password) => {
+export const signUp = async (firstName, lastName, email, password) => {
     const user = await prisma.user.findUnique({
         where: {
             email,
@@ -16,6 +16,8 @@ export const signUp = async (email, password) => {
 
     await prisma.user.create({
         data: {
+            firstName,
+            lastName,
             email,
             passwordHash
         }

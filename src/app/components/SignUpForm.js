@@ -8,6 +8,8 @@ import { useRouter } from 'next/navigation';
 
 const SignUpForm = () => {
     const router = useRouter()
+    const [firstName, setFirstName] = useState('')
+    const [lastName, setLastName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [message, setMessage] = useState('')
@@ -15,7 +17,7 @@ const SignUpForm = () => {
 
     const handleSubmit = async () => {
         setMessage('Signing up ...')
-        await signUp(email, password)
+        await signUp(firstName, lastName, email, password)
         setSnack(true)
         setTimeout(() => {
             router.push('/auth/signin')
@@ -35,9 +37,12 @@ const SignUpForm = () => {
                 <Box component="form" noValidate sx={{ mt: 3 }}>
                     <Grid container spacing={2}>
                         <Grid item xs={12} sm={6}>
-                            <TextField autoComplete="given-name" required fullWidth autoFocus
+                            <TextField required fullWidth autoFocus
                                 id="firstName"
                                 label="First Name"
+                                name="firstName"
+                                autoComplete="given-name"
+                                onChange={(e) => setFirstName(e.target.value)}
                             />
                         </Grid>
                         <Grid item xs={12} sm={6}>
@@ -46,6 +51,7 @@ const SignUpForm = () => {
                                 label="Last Name"
                                 name="lastName"
                                 autoComplete="family-name"
+                                onChange={(e) => setLastName(e.target.value)}
                             />
                         </Grid>
                         <Grid item xs={12}>
