@@ -31,6 +31,7 @@ export const authOptions = {
                         email
                     }
                 })
+                console.log('user', user);
                 if (!user) {
                     return null
                 }
@@ -79,6 +80,7 @@ export const authOptions = {
     callbacks: {
         async session({ session, token, user }) {
             if (session?.user) {
+                session.user.username = token.username
                 session.user.email = token.email
                 session.user.id = token.uid
             }
@@ -86,6 +88,7 @@ export const authOptions = {
         },
         async jwt({ token, user, account, profile, isNewUser }) {
             if (user) {
+                token.username = `${user.firstName} ${user.lastName}`
                 token.email = user.email
                 token.uid = user?.id
             }

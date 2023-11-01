@@ -8,10 +8,18 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Avatar from '@mui/material/Avatar';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
 
-const pages = ['Products', 'Pricing', 'Blog'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const pages = [
+    { name: 'Home', redirect: '/' },
+    { name: 'Dashboard', redirect: '/protected/dashboard' },
+    { name: 'Products', redirect: '/protected/products' }
+];
+const settings = [
+    { name: 'Profile', redirect: '#' },
+    { name: 'Account', redirect: '#' },
+    { name: 'Dashboard', redirect: '#' },
+    { name: 'Logout', redirect: '/auth/signout' }
+];
 
 const NavBarComp = ({ session }) => {
     const [anchorElNav, setAnchorElNav] = useState(null);
@@ -28,37 +36,15 @@ const NavBarComp = ({ session }) => {
         setAnchorElNav(null);
     };
 
-    const handleCloseUserMenu = () => {
-        setAnchorElUser(null);
-    };
-    return (<>
+    const menuitems = settings.filter((item) => {
+        if (!session) return item.name != 'Logout'
+        else return item
+    })
+
+    return (
         <AppBar position="static">
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
-                    <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-                        <Button sx={{ color: 'white', display: 'block' }}>LOGO</Button>
-                        <Link underline='none' href='/'><Button sx={{ color: 'white', display: 'block' }}>Home</Button></Link>
-                        <Link underline='none' href='/protected/dashboard'><Button sx={{ color: 'white', display: 'block' }}>Dashboard</Button></Link>
-                        <Link underline='none' href='/protected/products'><Button sx={{ color: 'white', display: 'block' }}>Products</Button></Link>
-                    </Box>
-                    <Box>
-                        {session && session.user?.email
-                            ? (<Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-                                <Link href='/auth/signout'><Button sx={{ color: 'white', display: 'block' }}>Sign out</Button></Link>
-                                <Button sx={{ color: 'white', display: 'block', fontWeight: 'bolder' }}>Signed in as {session.user?.email}</Button>
-                            </Box>)
-                            : (<Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-                                <Link href='/auth/signin'><Button sx={{ color: 'white', display: 'block' }}>Sign in</Button></Link>
-                                <Link href='/auth/signup'><Button sx={{ color: 'white', display: 'block' }}>Sign up</Button></Link>
-                            </Box>)}
-                    </Box>
-                </Toolbar>
-            </Container>
-        </AppBar>
-        <AppBar position="static">
-            <Container maxWidth="xl">
-                <Toolbar disableGutters>
-                    <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
                     <Typography
                         variant="h6"
                         noWrap
@@ -74,7 +60,7 @@ const NavBarComp = ({ session }) => {
                             textDecoration: 'none',
                         }}
                     >
-                        LOGO
+                        SAURAV
                     </Typography>
 
                     <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -106,14 +92,15 @@ const NavBarComp = ({ session }) => {
                                 display: { xs: 'block', md: 'none' },
                             }}
                         >
-                            {pages.map((page) => (
-                                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                                    <Typography textAlign="center">{page}</Typography>
+                            {pages.map((page, index) => (
+                                <MenuItem key={index} onClick={handleCloseNavMenu}>
+                                    <Link href={page.redirect} sx={{ color: 'inherit', textDecoration: "none" }}>
+                                        <Typography textAlign="center">{page.name}</Typography>
+                                    </Link>
                                 </MenuItem>
                             ))}
                         </Menu>
                     </Box>
-                    <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
                     <Typography
                         variant="h5"
                         noWrap
@@ -130,20 +117,20 @@ const NavBarComp = ({ session }) => {
                             textDecoration: 'none',
                         }}
                     >
-                        LOGO
+                        SAURAV
                     </Typography>
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-                        {pages.map((page) => (
-                            <Button
-                                key={page}
-                                onClick={handleCloseNavMenu}
-                                sx={{ my: 2, color: 'white', display: 'block' }}
-                            >
-                                {page}
-                            </Button>
+                        {pages.map((page, index) => (
+                            <Link key={index} href={page.redirect} sx={{ color: 'inherit', textDecoration: "none" }}>
+                                <Button key={index} sx={{ my: 2, color: 'white', display: 'block' }}>{page.name}</Button>
+                            </Link>
                         ))}
                     </Box>
 
+                    {session && session.user?.email
+                        ? <Button sx={{ color: 'white', display: 'block' }}><b>{session.user?.username}</b></Button>
+                        : <Link href='/auth/signin'><Button sx={{ color: 'white', display: 'block' }}>Sign in</Button></Link>
+                    }
                     <Box sx={{ flexGrow: 0 }}>
                         <Tooltip title="Open settings">
                             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
@@ -164,19 +151,20 @@ const NavBarComp = ({ session }) => {
                                 horizontal: 'right',
                             }}
                             open={Boolean(anchorElUser)}
-                            onClose={handleCloseUserMenu}
+                            onClose={() => setAnchorElUser(null)}
                         >
-                            {settings.map((setting) => (
-                                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                                    <Typography textAlign="center">{setting}</Typography>
+                            {menuitems.map((item, index) => (
+                                <MenuItem key={index}>
+                                    <Link href={item.redirect} sx={{ color: 'inherit', textDecoration: "none" }}>
+                                        <Typography textAlign="center">{item.name}</Typography>
+                                    </Link>
                                 </MenuItem>
                             ))}
                         </Menu>
                     </Box>
                 </Toolbar>
             </Container>
-        </AppBar>
-    </>
+        </AppBar >
     )
 }
 
