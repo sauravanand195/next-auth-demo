@@ -9,9 +9,7 @@ const pages = [
     { name: 'Products', redirect: '/protected/products' }
 ];
 const settings = [
-    { name: 'Profile', redirect: '#' },
-    { name: 'Account', redirect: '#' },
-    { name: 'Dashboard', redirect: '#' },
+    { name: 'Edit Profile', redirect: '#' },
     { name: 'Logout', redirect: '/auth/signout' }
 ];
 
@@ -24,12 +22,21 @@ const NavBarComp = ({ session }) => {
         else return item
     })
 
+    function stringAvatar(name) {
+        return {
+            sx: {
+                bgcolor: 'purple',
+            },
+            children: `${name.split(' ')[0][0]}${name.split(' ')[1][0]}`,
+        };
+    }
+
     return (
         <AppBar position="static">
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
-                    <Typography variant="h6" noWrap component="a" sx={{ mr: 2, display: { xs: 'none', md: 'flex' }, fontFamily: 'monospace', fontWeight: 700, letterSpacing: '.3rem', color: 'inherit', textDecoration: 'none', }}>
-                        SAURAV
+                    <Typography variant="h6" noWrap component="a" sx={{ mr: 2, display: { xs: 'none', md: 'flex' }, fontSize: '1rem', fontFamily: 'monospace', fontWeight: 700, letterSpacing: '.1rem', color: 'inherit', textDecoration: 'none', }}>
+                        TECHSOL
                     </Typography>
                     <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
                         <IconButton size="large" aria-label="account of current user" aria-controls="menu-appbar" aria-haspopup="true" onClick={() => setAnchorElNav(true)} color="inherit">
@@ -52,8 +59,8 @@ const NavBarComp = ({ session }) => {
                             ))}
                         </Menu>
                     </Box>
-                    <Typography variant="h5" noWrap component="a" sx={{ mr: 2, display: { xs: 'flex', md: 'none' }, flexGrow: 1, fontFamily: 'monospace', fontWeight: 700, letterSpacing: '.3rem', color: 'inherit', textDecoration: 'none', }}>
-                        SAURAV
+                    <Typography variant="h6" component="a" sx={{ display: { xs: 'flex', md: 'none' }, flexGrow: 1, fontSize: '1rem', fontFamily: 'monospace', fontWeight: 700, letterSpacing: '.2rem', color: 'inherit', textDecoration: 'none', textAlign: 'center' }}>
+                        TECHSOL
                     </Typography>
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                         {pages.map((page, index) => (
@@ -70,7 +77,7 @@ const NavBarComp = ({ session }) => {
                     <Box sx={{ flexGrow: 0 }}>
                         <Tooltip title="Open settings">
                             <IconButton onClick={() => setAnchorElUser(true)} sx={{ p: 0 }}>
-                                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                                <Avatar alt="Remy Sharp" {...stringAvatar(session.user?.username)} />
                             </IconButton>
                         </Tooltip>
                         <Menu id="menu-appbar" keepMounted
