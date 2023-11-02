@@ -1,5 +1,5 @@
 "use server"
-import prisma from "@/app/lib/prisma"
+import prisma from "@/app/lib/prisma";
 
 export const addTodo = async (task, description, priority, status) => {
     await prisma.user.create({
