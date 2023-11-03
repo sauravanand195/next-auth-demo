@@ -5,6 +5,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import ProfilePopup from './ProfilePopup';
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
+import { useRouter } from 'next/navigation';
 
 const pages = [
     { name: 'Home', redirect: '/' },
@@ -13,6 +14,7 @@ const pages = [
 ];
 
 const NavBarComp = ({ session }) => {
+    const router = useRouter();
     const [anchorElNav, setAnchorElNav] = useState(null);
     const [anchorElUser, setAnchorElUser] = useState(null);
     const [openProfile, setOpenProfile] = useState(false);
@@ -69,7 +71,7 @@ const NavBarComp = ({ session }) => {
 
                         {session && session.user?.email
                             ? <Button sx={{ color: 'white', display: 'block' }}><b>{session.user?.username}</b></Button>
-                            : <Link href='/auth/signin'><Button sx={{ color: 'white', display: 'block' }}>Sign in</Button></Link>
+                            : <Button onClick={() => { router.push('/auth/signin') }} sx={{ color: 'white', display: 'block' }}>Sign in</Button>
                         }
                         <Box sx={{ flexGrow: 0 }}>
                             <Tooltip title="Open settings">
