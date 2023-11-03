@@ -74,7 +74,7 @@ const NavBarComp = ({ session }) => {
                         <Box sx={{ flexGrow: 0 }}>
                             <Tooltip title="Open settings">
                                 <IconButton onClick={() => setAnchorElUser(true)} sx={{ p: 0 }}>
-                                    <Avatar {...stringAvatar(session?.user?.username)} />
+                                    {session ? <Avatar {...stringAvatar(session.user?.username)} /> : <Avatar />}
                                 </IconButton>
                             </Tooltip>
                             <Menu id="menu-appbar" keepMounted
@@ -88,33 +88,33 @@ const NavBarComp = ({ session }) => {
                                     <CardContent>
                                         <div onClick={() => setAnchorElUser(true)} style={{ paddingBottom: 12, display: 'flex' }}>
                                             <IconButton style={{ width: '65px', display: 'flex', justifyContent: 'center', padding: 0 }}>
-                                                <Avatar sx={{ width: 45, height: 45 }} {...stringAvatar(session?.user?.username)} />
+                                                {session ? <Avatar sx={{ width: 45, height: 45 }} {...stringAvatar(session?.user?.username)} /> : <Avatar sx={{ width: 45, height: 45 }} />}
                                             </IconButton>
                                             <div style={{ padding: '1px 0px 0px 10px' }}>
                                                 <Typography component="div" sx={{ fontSize: '14px', fontWeight: 'bolder' }}>
-                                                    {session.user?.username}
+                                                    {session ? session.user?.username : 'N/A'}
                                                 </Typography>
                                                 <Typography component="div" sx={{ fontSize: '14px' }}>
-                                                    {session.user?.email}
+                                                    {session ? session.user?.email : 'N/A'}
                                                 </Typography>
                                             </div>
                                         </div>
-                                        <div onClick={() => setAnchorElUser(true)} style={{ paddingBottom: 10, display: 'flex' }}>
+                                        {session && <div onClick={() => setAnchorElUser(true)} style={{ paddingBottom: 10, display: 'flex' }}>
                                             <div style={{ width: '65px', textAlign: 'center' }}><SettingsOutlinedIcon color='primary' /></div>
                                             <div style={{ padding: '1px 0px 0px 10px' }}>
                                                 <Typography component="div" sx={{ fontSize: '14px', fontWeight: 'bolder', cursor: 'pointer' }} onClick={() => setOpenProfile(true)}>
                                                     Manage Account
                                                 </Typography>
                                             </div>
-                                        </div>
-                                        <div onClick={() => setAnchorElUser(true)} style={{ padding: 0, display: 'flex' }}>
+                                        </div>}
+                                        {session && <div onClick={() => setAnchorElUser(true)} style={{ padding: 0, display: 'flex' }}>
                                             <div style={{ width: '65px', textAlign: 'center' }}><LogoutOutlinedIcon color='primary' /></div>
                                             <div style={{ padding: '1px 0px 0px 10px' }}>
                                                 <Link href="/auth/signout" sx={{ color: 'inherit', textDecoration: "none" }}>
                                                     <Typography textAlign="center" sx={{ fontSize: '14px', fontWeight: 'bolder' }} >Sign out</Typography>
                                                 </Link>
                                             </div>
-                                        </div>
+                                        </div>}
                                     </CardContent>
                                 </Card>
                             </Menu>
