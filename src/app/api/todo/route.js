@@ -47,7 +47,6 @@ export async function POST(NextRequest) {
 
 export async function PUT(NextRequest) {
     const json = await NextRequest.json();
-    console.log('json >>>> ', json);
     try {
         const todo = await prisma.todo.update({
             where: { id: json.id, },
@@ -69,7 +68,6 @@ export async function PUT(NextRequest) {
 
 export async function DELETE(NextRequest) {
     const json = await NextRequest.json();
-    console.log('json >>>>> ', json);
     try {
         const deleteUser = await prisma.todo.delete({
             where: { id: json.id, },
