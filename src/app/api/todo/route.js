@@ -66,12 +66,13 @@ export async function PUT(NextRequest) {
         });
     }
 }
+
 export async function DELETE(NextRequest) {
     const json = await NextRequest.json();
     console.log('json >>>>> ', json);
     try {
-        const deleteUser = await prisma.user.delete({
-            where: { id: 1, },
+        const deleteUser = await prisma.todo.delete({
+            where: { id: json.id, },
         })
         return NextResponse.json({
             status: true,
@@ -86,4 +87,3 @@ export async function DELETE(NextRequest) {
         });
     }
 }
-

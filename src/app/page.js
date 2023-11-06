@@ -14,10 +14,10 @@ export default function Home() {
 
   const createTodo = async () => {
     const json = {
-      task: 'Testfdzgnzk',
-      description: 'Test',
-      status: 'Test',
-      priority: 'Test',
+      task: 'Saurav Anand',
+      description: 'Test2',
+      status: 'incomplete',
+      priority: 'medium',
     }
     try {
       const res = await axios.post(`http://localhost:3000/api/todo`, json)
@@ -49,16 +49,14 @@ export default function Home() {
   }
 
   const deleteTodo = async () => {
-    const val = { id: 3, }
+    const val = { id: 4, }
     try {
       const res = await axios.delete(`http://localhost:3000/api/todo`, { data: { id: val.id } })
-      console.log('response', res);
+      console.log('response', res?.data);
     } catch (err) {
       console.log('err', err);
     }
   }
-
-
 
   return (
     <div>
