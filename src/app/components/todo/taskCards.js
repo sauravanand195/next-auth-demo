@@ -9,7 +9,7 @@ import BookmarksIcon from '@mui/icons-material/Bookmarks';
 import axios from "axios";
 import { useState } from "react";
 import TaskPopup from "./taskPopup";
-import { CustomToolTip } from "../../../public/js/commonFun";
+import { CustomToolTip } from "../../../../public/js/commonFun";
 
 const TaskCards = ({ todoData, fetchData }) => {
     const [openPopup, setOpenPopup] = useState(false)

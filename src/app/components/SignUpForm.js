@@ -5,7 +5,6 @@ import { Avatar, Button, CssBaseline, TextField, Link, Grid, Box, Typography, Co
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import AlertComp from './AlertComp';
 import { useRouter } from 'next/navigation';
-import ProfileComp from './ProfileComp';
 
 const SignUpForm = () => {
     const router = useRouter()

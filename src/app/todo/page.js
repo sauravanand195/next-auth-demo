@@ -2,9 +2,9 @@
 import { useEffect, useState } from 'react'
 import { CssBaseline, Stack, Typography, Container, Box, Button } from '@mui/material';
 import AddOutlined from '@mui/icons-material/AddOutlined';
-import TaskCards from '../components/taskCards';
-import TaskPopup from '../components/taskPopup';
-import FooterTodo from '../components/footerTodo';
+import TaskCards from '../components/todo/taskCards';
+import TaskPopup from '../components/todo/taskPopup';
+import FooterTodo from '../components/todo/footerTodo';
 import { CustomToolTip } from '../../../public/js/commonFun';
 
 const Index = () => {
