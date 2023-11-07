@@ -43,7 +43,7 @@ const NavBarComp = ({ session }) => {
                                 <MenuIcon />
                             </IconButton>
                             <Menu id="menu-appbar" keepMounted
-                                anchorOrigin={{ vertical: 'bottom', horizontal: 'left', }}
+                                anchorOrigin={{ vertical: 'top', horizontal: 'left', }}
                                 transformOrigin={{ vertical: 'top', horizontal: 'left', }}
                                 open={Boolean(anchorElNav)}
                                 onClose={() => setAnchorElNav(false)}
