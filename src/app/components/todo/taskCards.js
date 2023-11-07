@@ -17,7 +17,7 @@ const TaskCards = ({ todoData, fetchData }) => {
 
     const updatestatus = async (val) => {
         try {
-            const response = await axios.put(`http://localhost:3000/api/todo`, { id: val.id, task: val.task, description: val.description, priority: val.priority, status: (val.status == 'incomplete') ? 'complete' : 'incomplete' })
+            const response = await axios.put(`/api/todo`, { id: val.id, task: val.task, description: val.description, priority: val.priority, status: (val.status == 'incomplete') ? 'complete' : 'incomplete' })
             if (response?.data?.status == true) {
                 console.log('Data updated successfully')
                 fetchData()
@@ -37,7 +37,7 @@ const TaskCards = ({ todoData, fetchData }) => {
 
     const deleteTask = async (id) => {
         try {
-            const response = await axios.delete(`http://localhost:3000/api/todo`, { data: { id: id } })
+            const response = await axios.delete(`/api/todo`, { data: { id: id } })
             if (response?.data?.status == true) {
                 console.log('Data deleted successfully')
                 fetchData()

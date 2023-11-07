@@ -12,14 +12,14 @@ const Index = () => {
     const [todoData, setTodoData] = useState([])
 
     const fetchData = async () => {
-        const response = await fetch(`http://localhost:3000/api/todo`)
+        const response = await fetch(`/api/todo`)
         const responseObj = await response.json()
         setTodoData(responseObj?.results)
     }
 
     useEffect(() => {
         const loadData = async () => {
-            const response = await fetch(`http://localhost:3000/api/todo`)
+            const response = await fetch(`/api/todo`)
             const responseObj = await response.json()
             setTodoData(responseObj?.results)
         }
