@@ -93,32 +93,32 @@ const Index = () => {
                             {address?.city}, {address?.principalSubdivision}
                         </Typography>
                     </Box>
-                    <div className="tmeslotsldr newcalTab_outer wrapper-flex">
-                        <div className="tmeslotli text-center " style={{ padding: "10px 15px", fontSize: "14px" }}>
+                    <div className="calslots calTab_outer wrapper-flex">
+                        <div className="calslotitem">
                             <div style={{ color: "#fff" }}>Mon</div>
                             <div style={{ color: "#fff" }}>01</div>
                         </div>
-                        <div className="tmeslotli text-center" style={{ padding: "10px 15px", fontSize: "14px" }}>
+                        <div className="calslotitem">
                             <div style={{ color: "#fff" }}>Tue</div>
                             <div style={{ color: "#fff" }}>02</div>
                         </div>
-                        <div className="tmeslotli text-center active" style={{ padding: "10px 15px", fontSize: "14px" }}>
+                        <div className="calslotitem active">
                             <div style={{ color: "#fff" }}>Wed</div>
                             <div style={{ color: "#fff" }}>03</div>
                         </div>
-                        <div className="tmeslotli text-center" style={{ padding: "10px 15px", fontSize: "14px" }}>
+                        <div className="calslotitem">
                             <div style={{ color: "#fff" }}>Thu</div>
                             <div style={{ color: "#fff" }}>04</div>
                         </div>
-                        <div className="tmeslotli text-center" style={{ padding: "10px 15px", fontSize: "14px" }}>
+                        <div className="calslotitem">
                             <div style={{ color: "#fff" }}>Fri</div>
                             <div style={{ color: "#fff" }}>05</div>
                         </div>
-                        <div className="tmeslotli text-center" style={{ padding: "10px 15px", fontSize: "14px" }}>
+                        <div className="calslotitem">
                             <div style={{ color: "#fff" }}>Sat</div>
                             <div style={{ color: "#fff" }}>06</div>
                         </div>
-                        <div className="tmeslotli text-center" style={{ padding: "10px 15px", fontSize: "14px" }}>
+                        <div className="calslotitem">
                             <div style={{ color: "#fff" }}>Sun</div>
                             <div style={{ color: "#fff" }}>07</div>
                         </div>
@@ -128,11 +128,11 @@ const Index = () => {
             </main>
             <FooterTodo />
             <style jsx>{`
-                .tmeslotsldr.newcalTab_outer{overflow-x: scroll; overflow-y: hidden; position:relative;background-color:#e1bbbb1f;}
-                .tmeslotsldr.newcalTab_outer .tmeslotli{border:0; width:auto; white-space: nowrap;position: relative;}
-                .tmeslotsldr.newcalTab_outer .active{box-shadow: 0px 10px 15px 0px #e66465; font-size: 15px !important;}
+                .calslots.calTab_outer{overflow-x: scroll; overflow-y: hidden; position:relative;background-color:#e1bbbb1f;}
+                .calslots.calTab_outer .calslotitem{border:0; width:auto; white-space: nowrap;position: relative;padding:10px 15px;fontSize:14px; text-align: center;}
+                .calslots.calTab_outer .active{box-shadow: 0px 10px 15px 0px #e66465; font-size: 15px !important;}
                 .wrapper-flex{display:flex;width:100%;}
-                .tmeslotli{width:70px;border-radius:4px;border:solid 1px #d4dbe0;display:inline-block;margin-right:13px;padding:5px 0;}
+                .calslotitem{width:70px;border-radius:4px;border:solid 1px #d4dbe0;display:inline-block;margin-right:13px;padding:5px 0;}
                 .text-center{text-align: center;}
             `}</style>
         </div>
