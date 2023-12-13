@@ -3,12 +3,12 @@ import { useEffect, useState } from 'react'
 import { CssBaseline, Stack, Typography, Container, Box, Button, Fab } from '@mui/material';
 import AddOutlined from '@mui/icons-material/AddOutlined';
 import AddIcon from '@mui/icons-material/Add';
-import TaskCards from '../components/todo/taskCards';
 import TaskPopup from '../components/todo/taskPopup';
 import FooterTodo from '../components/todo/footerTodo';
 import { CustomToolTip } from '../../../public/js/commonFun';
 import FilterDramaOutlinedIcon from '@mui/icons-material/FilterDramaOutlined';
 import AirOutlinedIcon from '@mui/icons-material/AirOutlined';
+import PlannerList from '../components/todo/plannerList';
 
 const Index = () => {
     const [open, setOpen] = useState(false)
@@ -124,7 +124,7 @@ const Index = () => {
                         </div>
                     </div>
                 </Stack>
-                <TaskCards todoData={todoData} fetchData={fetchData} />
+                <PlannerList todoData={todoData} fetchData={fetchData} />
             </main>
             <FooterTodo />
             <style jsx>{`
