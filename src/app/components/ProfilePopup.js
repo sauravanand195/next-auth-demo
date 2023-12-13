@@ -2,8 +2,9 @@ import React from 'react'
 import { Avatar, Card, Dialog, FormControl, FormHelperText, InputAdornment, TextField, Typography } from "@mui/material"
 import EditIcon from '@mui/icons-material/Edit';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
+import { stringAvatar } from '../../../public/js/commonFun';
 
-const ProfilePopup = ({ open, handleClose, stringAvatar, session }) => {
+const ProfilePopup = ({ open, handleClose, session }) => {
     return (
         <Dialog onClose={handleClose} open={open}>
             <Card sx={{ minWidth: 600, padding: '20px' }}>
@@ -17,7 +18,7 @@ const ProfilePopup = ({ open, handleClose, stringAvatar, session }) => {
                     Profile
                 </Typography>
                 <div style={{ display: 'flex', padding: '20px 0 20px 0' }}>
-                    <Avatar sx={{ width: 45, height: 45 }} {...stringAvatar(session?.user?.username)} />
+                    <Avatar sx={{ width: 45, height: 45 }} {...stringAvatar(session?.user?.username, '#9c409c', '17px')} />
                     <Typography sx={{ color: 'grey', fontWeight: 'bold', padding: "0px 0px 0px 20px", alignItems: 'middle' }}>{session?.user?.username}<EditIcon color='primary' sx={{ paddingLeft: '8px', paddingTop: '8px', cursor: 'pointer' }} /></Typography>
                 </div>
                 <Typography sx={{ fontWeight: 'bold', borderBottom: '1px solid lightgrey' }} >

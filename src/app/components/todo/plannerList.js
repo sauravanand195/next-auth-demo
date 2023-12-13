@@ -9,46 +9,13 @@ import BookmarksIcon from '@mui/icons-material/Bookmarks';
 import axios from "axios";
 import { useState } from "react";
 import TaskPopup from "./taskPopup";
-import { CustomToolTip } from "../../../../public/js/commonFun";
+import { CustomToolTip, stringAvatar } from "../../../../public/js/commonFun";
 import Chip from '@mui/material/Chip';
-
-const steps = [
-    {
-        label: 'Select campaign settings',
-        description: `For each ad campaign that you create, you can control how much
-                you're willing to spend on clicks and conversions, which networks
-                and geographical locations you want your ads to show on, and more.`,
-    },
-    {
-        label: 'Create an ad group',
-        description:
-            'An ad group contains one or more ads which target a shared set of keywords.',
-    },
-    {
-        label: 'Create an ad',
-        description: `Try out different ad text to see what brings in the most customers,
-                and learn how to enhance your ads using features like ad extensions.
-                If you run into any problems with your ads, find out how to tell if
-                they're running and how to resolve approval issues.`,
-    },
-];
 
 const PlannerList = ({ todoData, fetchData }) => {
     const [openPopup, setOpenPopup] = useState(false)
     const [selectedTask, setSelectedTask] = useState({})
     const [activeStep, setActiveStep] = useState(0)
-
-    const handleNext = () => {
-        setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    };
-
-    const handleBack = () => {
-        setActiveStep((prevActiveStep) => prevActiveStep - 1);
-    };
-
-    const handleReset = () => {
-        setActiveStep(0);
-    };
 
     const updatestatus = async (val) => {
         try {
@@ -64,9 +31,9 @@ const PlannerList = ({ todoData, fetchData }) => {
 
     const getPCode = (val) => {
         switch (val) {
-            case 'high': return 'red';
-            case 'medium': return 'orange';
-            case 'low': return 'blue';
+            case 'high': return 'error';
+            case 'medium': return 'primary';
+            case 'low': return 'success';
         }
     }
 
@@ -128,59 +95,34 @@ const PlannerList = ({ todoData, fetchData }) => {
                 ))}
             </Grid> */}
             <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
-                <ListItem alignItems="flex-start" sx={{ pb: 2 }}
-                    secondaryAction={
-                        <>
-                            <IconButton onClick={() => editTask(val)}><EditIcon /></IconButton>
-                            <IconButton onClick={() => { deleteTask(val.id) }}><DeleteIcon /></IconButton>
-                        </>
-                    }
-                    disablePadding
-                >
-                    <ListItemAvatar>
-                        <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
-                    </ListItemAvatar>
-                    <ListItemText
-                        primary={<Typography sx={{ fontWeight: "bold" }}>Brunch this weekend</Typography>}
-                        secondary={<>
-                            <Typography sx={{ fontWeight: "normal" }}>Brunch this weekend</Typography>
-                            <Chip label="High" size="small" color="error" />
-                        </>}
-                    />
-                    <div className="line"></div>
-                </ListItem>
-                <ListItem alignItems="flex-start"
-                    secondaryAction={
-                        <>
-                            <IconButton onClick={() => editTask(val)}><EditIcon /></IconButton>
-                            <IconButton onClick={() => { deleteTask(val.id) }}><DeleteIcon /></IconButton>
-                        </>
-                    }
-                    disablePadding
-                >
-                    <ListItemAvatar>
-                        <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
-                    </ListItemAvatar>
-                    <ListItemText
-                        primary={<Typography sx={{ fontWeight: "bold" }}>Brunch this weekend</Typography>}
-                        secondary={<>
-                            <Typography sx={{ fontWeight: "normal" }}>Brunch this weekend</Typography>
-                            <Chip label="Medium" size="small" color="primary" />
-                        </>}
-                    />
-                    <div className="line"></div>
-                </ListItem>
-            </List>
+                {todoData?.map((val, ind) => (
+                    <ListItem alignItems="flex-start" sx={{ pb: 2 }}
+                        secondaryAction={
+                            <div style={{ marginTop: "-40px", marginRight: "-30px" }}>
+                                <IconButton onClick={() => editTask(val)}><EditIcon /></IconButton>
+                                <IconButton onClick={() => { deleteTask(val.id) }}><DeleteIcon /></IconButton>
+                            </div>
+                        }
+                        disablePadding
+                    >
+                        <ListItemAvatar>
+                            <Avatar {...stringAvatar(val.task, '#9c409c', '17px')} />
+                        </ListItemAvatar>
+                        <ListItemText
+                            primary={<Typography sx={{ fontWeight: "bold" }}>{val.task}</Typography>}
+                            secondary={<>
+                                <Typography sx={{ fontWeight: "normal", mb: 1 }}>{val.description}</Typography>
+                                <Chip label={val.priority} size="small" color={getPCode(val.priority)} />
+                            </>}
+                        />
+                        <div className="line"></div>
+                    </ListItem>
+                ))}
+            </List >
 
             <style jsx>{`
-                          .line {
-                            top: 48px;
-                            left: 19px;
-                            height: 60px;
-                            position: absolute;
-                            border-left: 3px solid gray;
-                          }
-                    `}</style>
+                .line {top: 49px;left: 19px;height: 66px;position: absolute;border-left: 3px solid gray;}
+            `}</style>
         </Container >
     );
 }

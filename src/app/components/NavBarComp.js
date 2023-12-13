@@ -6,6 +6,7 @@ import ProfilePopup from './ProfilePopup';
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 import { useRouter } from 'next/navigation';
+import { stringAvatar } from '../../../public/js/commonFun';
 
 const pages = [
     { name: 'Home', redirect: '/' },
@@ -19,27 +20,16 @@ const NavBarComp = ({ session }) => {
     const [anchorElUser, setAnchorElUser] = useState(null);
     const [openProfile, setOpenProfile] = useState(false);
 
-    const stringAvatar = (name) => {
-        return {
-            sx: {
-                bgcolor: 'purple',
-                fontSize: '17px',
-                lineHeight: '0'
-            },
-            children: `${name?.split(' ')[0][0].toUpperCase()}${name?.split(' ')[1][0].toUpperCase()}`,
-        };
-    }
-
     return (
         <>
-            <AppBar position="static">
+            <AppBar position="static" sx={{ backgroundColor: "white" }}>
                 <Container maxWidth="xl">
                     <Toolbar disableGutters>
-                        <Typography variant="h6" noWrap component="a" sx={{ mr: 2, display: { xs: 'none', md: 'flex' }, fontSize: '1rem', fontFamily: 'monospace', fontWeight: 700, letterSpacing: '.1rem', color: 'inherit', textDecoration: 'none', }}>
+                        <Typography variant="h6" noWrap component="a" sx={{ mr: 2, display: { xs: 'none', md: 'flex' }, fontSize: '1rem', fontFamily: 'monospace', fontWeight: 700, letterSpacing: '.1rem', color: 'black', textDecoration: 'none', }}>
                             TECHSOL
                         </Typography>
                         <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-                            <IconButton size="large" aria-label="account of current user" aria-controls="menu-appbar" aria-haspopup="true" onClick={() => setAnchorElNav(true)} color="inherit">
+                            <IconButton size="large" aria-label="account of current user" aria-controls="menu-appbar" aria-haspopup="true" onClick={() => setAnchorElNav(true)} color="black">
                                 <MenuIcon />
                             </IconButton>
                             <Menu id="menu-appbar" keepMounted
@@ -58,25 +48,25 @@ const NavBarComp = ({ session }) => {
                                 ))}
                             </Menu>
                         </Box>
-                        <Typography variant="h6" component="a" sx={{ display: { xs: 'flex', md: 'none' }, flexGrow: 1, fontSize: '1rem', fontFamily: 'monospace', fontWeight: 700, letterSpacing: '.2rem', color: 'inherit', textDecoration: 'none', textAlign: 'center' }}>
+                        <Typography variant="h6" component="a" sx={{ display: { xs: 'flex', md: 'none' }, flexGrow: 1, fontSize: '1rem', fontFamily: 'monospace', fontWeight: 700, letterSpacing: '.2rem', color: 'black', textDecoration: 'none', textAlign: 'center' }}>
                             TECHSOL
                         </Typography>
                         <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                             {pages.map((page, index) => (
                                 <Link key={index} href={page.redirect} sx={{ color: 'inherit', textDecoration: "none" }}>
-                                    <Button key={index} sx={{ my: 2, color: 'white', display: 'block' }}>{page.name}</Button>
+                                    <Button key={index} sx={{ my: 2, color: 'black', display: 'block' }}>{page.name}</Button>
                                 </Link>
                             ))}
                         </Box>
 
                         {session && session.user?.email
-                            ? <Button sx={{ color: 'white', display: 'block' }}><b>{session.user?.username}</b></Button>
-                            : <Button onClick={() => { router.push('/auth/signin') }} sx={{ color: 'white', display: 'block' }}>Sign in</Button>
+                            ? '' : <Button onClick={() => { router.push('/auth/signin') }} sx={{ color: 'white', display: 'block' }}>Sign in</Button>
+                            // <Button sx={{ color: 'white', display: 'block' }}><b>{session.user?.username}</b></Button>
                         }
                         <Box sx={{ flexGrow: 0 }}>
                             <Tooltip title="Open settings">
                                 <IconButton onClick={() => setAnchorElUser(true)} sx={{ p: 0 }}>
-                                    {session ? <Avatar {...stringAvatar(session.user?.username)} /> : <Avatar />}
+                                    {session ? <Avatar {...stringAvatar(session.user?.username, '#9c409c', '17px')} /> : <Avatar />}
                                 </IconButton>
                             </Tooltip>
                             <Menu id="menu-appbar" keepMounted
@@ -90,7 +80,7 @@ const NavBarComp = ({ session }) => {
                                     <CardContent>
                                         <div onClick={() => setAnchorElUser(true)} style={{ paddingBottom: 12, display: 'flex' }}>
                                             <IconButton style={{ width: '65px', display: 'flex', justifyContent: 'center', padding: 0 }}>
-                                                {session ? <Avatar sx={{ width: 45, height: 45 }} {...stringAvatar(session?.user?.username)} /> : <Avatar sx={{ width: 45, height: 45 }} />}
+                                                {session ? <Avatar sx={{ width: 45, height: 45 }} {...stringAvatar(session?.user?.username, '#9c409c', '17px')} /> : <Avatar sx={{ width: 45, height: 45 }} />}
                                             </IconButton>
                                             <div style={{ padding: '1px 0px 0px 10px' }}>
                                                 <Typography component="div" sx={{ fontSize: '14px', fontWeight: 'bolder' }}>
@@ -122,7 +112,7 @@ const NavBarComp = ({ session }) => {
                             </Menu>
                         </Box>
                     </Toolbar>
-                    {openProfile && <ProfilePopup open={openProfile} handleClose={() => setOpenProfile(false)} stringAvatar={stringAvatar} session={session} />}
+                    {openProfile && <ProfilePopup open={openProfile} handleClose={() => setOpenProfile(false)} session={session} />}
                 </Container>
             </AppBar >
         </>
