@@ -12,6 +12,9 @@ import {
     Link,
     IconButton,
     Typography,
+    Box,
+    TextField,
+    Snackbar,
 } from '@mui/material';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import TwitterIcon from '@mui/icons-material/Twitter';
@@ -36,6 +39,39 @@ const products = [
         description: 'Premium product for a premium experience.',
         content: 'Suspendisse potenti. Duis id ultricies ipsum. Nunc vestibulum ligula eu velit pharetra.',
     },
+];
+
+const testimonials = [
+    {
+        id: 1,
+        name: 'John Doe',
+        quote: 'Amazing products! The quality is unmatched, and the customer service is exceptional.',
+    },
+    {
+        id: 2,
+        name: 'Jane Smith',
+        quote: 'I love the variety of products. Each one feels unique and well-crafted.',
+    },
+    // Add more testimonials as needed
+];
+
+const productBenefits = [
+    {
+        id: 1,
+        title: 'Premium Quality',
+        description: 'Experience the highest quality materials and craftsmanship in every product.',
+    },
+    {
+        id: 2,
+        title: 'Innovative Designs',
+        description: 'Stay ahead with our cutting-edge and trendsetting product designs.',
+    },
+    {
+        id: 3,
+        title: 'Customer Satisfaction',
+        description: 'Our products are designed to exceed customer expectations and satisfaction.',
+    },
+    // Add more benefits as needed
 ];
 
 function getRandomImage() {
@@ -81,6 +117,55 @@ function App() {
         };
     }, []);
 
+    const [formData, setFormData] = useState({
+        name: '',
+        email: '',
+        message: '',
+    });
+
+    const [errors, setErrors] = useState({});
+    const [isSubmitting, setIsSubmitting] = useState(false);
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData((prevData) => ({
+            ...prevData,
+            [name]: value,
+        }));
+    };
+
+    const validateForm = () => {
+        const newErrors = {};
+        if (!formData.name.trim()) {
+            newErrors.name = 'Required';
+        }
+        if (!formData.email.trim()) {
+            newErrors.email = 'Required';
+        } else if (!/^\S+@\S+\.\S+$/.test(formData.email)) {
+            newErrors.email = 'Invalid email address';
+        }
+        if (!formData.message.trim()) {
+            newErrors.message = 'Required';
+        }
+        setErrors(newErrors);
+        return Object.keys(newErrors).length === 0;
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (validateForm()) {
+            // Add your form submission logic here
+            console.log(formData);
+
+            // Example: Simulate API request
+            setIsSubmitting(true);
+            setTimeout(() => {
+                setIsSubmitting(false);
+                // Show a success message or redirect the user
+            }, 1000);
+        }
+    };
+
     return (
         <div>
             <CssBaseline />
@@ -110,6 +195,9 @@ function App() {
             </Paper>
 
             <Container style={{ paddingTop: '20px' }}>
+                <Typography variant="h4" component="div" align="center" style={{ margin: '20px 0', fontWeight: 'bold' }}>
+                    Discover the Excellence of Our Products
+                </Typography>
                 <Grid container spacing={3}>
                     {products.map((product, index) => (
                         <Grid item xs={12} sm={6} md={4} key={product.id}>
@@ -117,11 +205,13 @@ function App() {
                                 elevation={4}
                                 style={{
                                     marginBottom: '20px',
-                                    borderRadius: '12px',
+                                    borderRadius: '5px',
                                     overflow: 'hidden',
                                     transition: 'transform 0.2s',
+                                    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
                                     '&:hover': {
                                         transform: 'scale(1.05)',
+                                        boxShadow: '0 8px 16px rgba(0, 0, 0, 0.2)',
                                     },
                                 }}
                             >
@@ -146,6 +236,132 @@ function App() {
                         </Grid>
                     ))}
                 </Grid>
+            </Container>
+
+            {/* Customer Testimonials Section */}
+            <div
+                style={{
+                    background: 'url(https://images.pexels.com/photos/259915/pexels-photo-259915.jpeg?auto=compress&cs=tinysrgb&w=600) center/cover',
+                    paddingTop: '40px',
+                    paddingBottom: '40px',
+                    borderRadius: '10px',
+                }}
+            >
+                <Container style={{ backgroundColor: 'rgba(255, 255, 255, 0.8)', borderRadius: '10px' }}>
+                    <Typography variant="h5" component="div" align="center" style={{ marginBottom: '20px', fontWeight: 'bold' }}>
+                        What Our Customers Say
+                    </Typography>
+                    <Grid container spacing={3}>
+                        {testimonials.map((testimonial) => (
+                            <Grid item xs={12} sm={6} md={4} key={testimonial.id}>
+                                <Paper style={{ padding: '20px', textAlign: 'center' }}>
+                                    <Typography variant="body1" component="div" style={{ marginBottom: '10px' }}>
+                                        {testimonial.quote}
+                                    </Typography>
+                                    <Typography variant="subtitle1" component="div" color="primary">
+                                        {testimonial.name}
+                                    </Typography>
+                                </Paper>
+                            </Grid>
+                        ))}
+                    </Grid>
+                </Container>
+            </div>
+
+            {/* Product Benefits Section */}
+            <div
+                style={{
+                    background: 'url(https://images.pexels.com/photos/259915/pexels-photo-259915.jpeg?auto=compress&cs=tinysrgb&w=600) center/cover',
+                    paddingTop: '40px',
+                    paddingBottom: '40px',
+                    borderRadius: '10px',
+                }}
+            >
+                <Container style={{ backgroundColor: 'rgba(255, 255, 255, 0.8)', borderRadius: '10px' }}>
+                    <Typography variant="h5" component="div" align="center" style={{ marginBottom: '20px', fontWeight: 'bold' }}>
+                        Key Product Benefits
+                    </Typography>
+                    <Grid container spacing={3}>
+                        {productBenefits.map((benefit) => (
+                            <Grid item xs={12} sm={6} md={4} key={benefit.id}>
+                                <Paper style={{ padding: '20px', textAlign: 'center' }}>
+                                    <Typography variant="h6" component="div" style={{ marginBottom: '10px', fontWeight: 'bold' }}>
+                                        {benefit.title}
+                                    </Typography>
+                                    <Typography variant="body1" component="div">
+                                        {benefit.description}
+                                    </Typography>
+                                </Paper>
+                            </Grid>
+                        ))}
+                    </Grid>
+                </Container>
+            </div>
+
+            <Container maxWidth="sm">
+                <Paper elevation={3} sx={{ padding: 3, marginTop: 4 }}>
+                    <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                        <Typography component="h1" variant="h5" sx={{ marginBottom: 2 }}>
+                            Contact Us
+                        </Typography>
+                        <form onSubmit={handleSubmit} noValidate>
+                            <TextField
+                                fullWidth
+                                margin="normal"
+                                id="name"
+                                label="Your Name"
+                                variant="outlined"
+                                name="name"
+                                value={formData.name}
+                                onChange={handleChange}
+                                error={Boolean(errors.name)}
+                                helperText={errors.name}
+                            />
+                            <TextField
+                                fullWidth
+                                margin="normal"
+                                id="email"
+                                label="Email Address"
+                                variant="outlined"
+                                name="email"
+                                type="email"
+                                value={formData.email}
+                                onChange={handleChange}
+                                error={Boolean(errors.email)}
+                                helperText={errors.email}
+                            />
+                            <TextField
+                                fullWidth
+                                margin="normal"
+                                id="message"
+                                label="Message"
+                                multiline
+                                rows={4}
+                                variant="outlined"
+                                name="message"
+                                value={formData.message}
+                                onChange={handleChange}
+                                error={Boolean(errors.message)}
+                                helperText={errors.message}
+                            />
+                            <Button
+                                type="submit"
+                                fullWidth
+                                variant="contained"
+                                color="primary"
+                                sx={{ mt: 3 }}
+                                disabled={isSubmitting}
+                            >
+                                {isSubmitting ? 'Submitting...' : 'Send Message'}
+                            </Button>
+                        </form>
+                    </Box>
+                </Paper>
+                <Snackbar
+                    open={isSubmitting}
+                    message="Submitting form..."
+                    anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+                />
             </Container>
 
             <Paper elevation={3} style={{ marginTop: '20px', padding: '20px' }}>
