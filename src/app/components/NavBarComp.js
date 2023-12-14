@@ -1,24 +1,25 @@
 "use client"
 import React, { useState } from 'react'
-import { AppBar, Box, Button, Container, Link, Toolbar, IconButton, Typography, Menu, Avatar, Tooltip, MenuItem, Card, CardHeader, CardMedia, CardContent, Grid } from '@mui/material'
+import { AppBar, Box, Button, Container, Link, Toolbar, IconButton, Typography, Menu, Avatar, Tooltip, MenuItem, Card, CardHeader, CardMedia, CardContent, Grid, Drawer, Divider, List } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu';
 import ProfilePopup from './ProfilePopup';
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 import { useRouter } from 'next/navigation';
 import { stringAvatar } from '../../../public/js/commonFun';
-
-const pages = [
-    { name: 'Home', redirect: '/' },
-    { name: 'Dashboard', redirect: '/protected/dashboard' },
-    { name: 'Products', redirect: '/protected/products' }
-];
+import GTranslateOutlinedIcon from '@mui/icons-material/GTranslateOutlined';
+import NotificationsActiveOutlinedIcon from '@mui/icons-material/NotificationsActiveOutlined';
+import PolicyOutlinedIcon from '@mui/icons-material/PolicyOutlined';
+import FeedbackOutlinedIcon from '@mui/icons-material/FeedbackOutlined';
 
 const NavBarComp = ({ session }) => {
     const router = useRouter();
-    const [anchorElNav, setAnchorElNav] = useState(null);
-    const [anchorElUser, setAnchorElUser] = useState(null);
     const [openProfile, setOpenProfile] = useState(false);
+    const [openDrawer, setOpenDrawer] = useState(false)
+
+    const getAbbr = (name) => {
+        return `${name?.split(' ')[0][0].toUpperCase()}${name?.split(' ')[1][0].toUpperCase()}`
+    }
 
     return (
         <>
@@ -26,92 +27,112 @@ const NavBarComp = ({ session }) => {
                 <Container maxWidth="xl">
                     <Toolbar disableGutters>
                         <Typography variant="h6" noWrap component="a" sx={{ mr: 2, display: { xs: 'none', md: 'flex' }, fontSize: '1rem', fontFamily: 'monospace', fontWeight: 700, letterSpacing: '.1rem', color: 'black', textDecoration: 'none', }}>
-                            TECHSOL
+                            Techbook
                         </Typography>
-                        <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-                            <IconButton size="large" aria-label="account of current user" aria-controls="menu-appbar" aria-haspopup="true" onClick={() => setAnchorElNav(true)} color="black">
-                                <MenuIcon />
-                            </IconButton>
-                            <Menu id="menu-appbar" keepMounted
-                                anchorOrigin={{ vertical: 'top', horizontal: 'left', }}
-                                transformOrigin={{ vertical: 'top', horizontal: 'left', }}
-                                open={Boolean(anchorElNav)}
-                                onClose={() => setAnchorElNav(false)}
-                                sx={{ display: { xs: 'block', md: 'none' } }}
-                            >
-                                {pages.map((page, index) => (
-                                    <MenuItem key={index} onClick={() => setAnchorElNav(false)}>
-                                        <Link href={page.redirect} sx={{ color: 'inherit', textDecoration: "none" }}>
-                                            <Typography textAlign="center">{page.name}</Typography>
-                                        </Link>
-                                    </MenuItem>
-                                ))}
-                            </Menu>
-                        </Box>
                         <Typography variant="h6" component="a" sx={{ display: { xs: 'flex', md: 'none' }, flexGrow: 1, fontSize: '1rem', fontFamily: 'monospace', fontWeight: 700, letterSpacing: '.2rem', color: 'black', textDecoration: 'none', textAlign: 'center' }}>
-                            TECHSOL
+                            Techbook
                         </Typography>
                         <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-                            {pages.map((page, index) => (
-                                <Link key={index} href={page.redirect} sx={{ color: 'inherit', textDecoration: "none" }}>
-                                    <Button key={index} sx={{ my: 2, color: 'black', display: 'block' }}>{page.name}</Button>
-                                </Link>
-                            ))}
+                            <Link sx={{ color: 'inherit', textDecoration: "none" }}>
+                                <Button sx={{ my: 2, color: 'black', display: 'block' }}>Testimonials</Button>
+                            </Link>
+                            <Link sx={{ color: 'inherit', textDecoration: "none" }}>
+                                <Button sx={{ my: 2, color: 'black', display: 'block' }}>About</Button>
+                            </Link>
+                            <Link sx={{ color: 'inherit', textDecoration: "none" }}>
+                                <Button sx={{ my: 2, color: 'black', display: 'block' }}>Contact us</Button>
+                            </Link>
                         </Box>
-
                         {session && session.user?.email
-                            ? '' : <Button onClick={() => { router.push('/auth/signin') }} sx={{ color: 'white', display: 'block' }}>Sign in</Button>
+                            ? '' : <Button onClick={() => { router.push('/auth/signin') }} sx={{ color: 'black', display: 'block' }}>Sign in</Button>
                             // <Button sx={{ color: 'white', display: 'block' }}><b>{session.user?.username}</b></Button>
                         }
                         <Box sx={{ flexGrow: 0 }}>
                             <Tooltip title="Open settings">
-                                <IconButton onClick={() => setAnchorElUser(true)} sx={{ p: 0 }}>
+                                <IconButton onClick={() => setOpenDrawer(true)} sx={{ p: 0 }}>
                                     {session ? <Avatar {...stringAvatar(session.user?.username, '#9c409c', '17px')} /> : <Avatar />}
                                 </IconButton>
                             </Tooltip>
-                            <Menu id="menu-appbar" keepMounted
-                                anchorOrigin={{ vertical: 'top', horizontal: 'right', }}
-                                transformOrigin={{ vertical: 'top', horizontal: 'right', }}
-                                open={Boolean(anchorElUser)}
-                                onClose={() => setAnchorElUser(false)}
-                                sx={{ mt: '45px' }}
-                            >
-                                <Card sx={{ minWidth: 250, maxWidth: 250, marginBottom: '-8px', marginTop: '-8px' }}>
-                                    <CardContent>
-                                        <div onClick={() => setAnchorElUser(true)} style={{ paddingBottom: 12, display: 'flex' }}>
-                                            <IconButton style={{ width: '65px', display: 'flex', justifyContent: 'center', padding: 0 }}>
-                                                {session ? <Avatar sx={{ width: 45, height: 45 }} {...stringAvatar(session?.user?.username, '#9c409c', '17px')} /> : <Avatar sx={{ width: 45, height: 45 }} />}
-                                            </IconButton>
-                                            <div style={{ padding: '1px 0px 0px 10px' }}>
-                                                <Typography component="div" sx={{ fontSize: '14px', fontWeight: 'bolder' }}>
-                                                    {session ? session.user?.username : 'N/A'}
-                                                </Typography>
-                                                <Typography component="div" sx={{ fontSize: '14px' }}>
-                                                    {session ? session.user?.email : 'N/A'}
-                                                </Typography>
-                                            </div>
-                                        </div>
-                                        {session && <div onClick={() => setAnchorElUser(true)} style={{ paddingBottom: 10, display: 'flex' }}>
-                                            <div style={{ width: '65px', textAlign: 'center' }}><SettingsOutlinedIcon color='primary' /></div>
-                                            <div style={{ padding: '1px 0px 0px 10px' }}>
-                                                <Typography component="div" sx={{ fontSize: '14px', fontWeight: 'bolder', cursor: 'pointer' }} onClick={() => setOpenProfile(true)}>
-                                                    Manage Account
-                                                </Typography>
-                                            </div>
-                                        </div>}
-                                        {session && <div onClick={() => setAnchorElUser(true)} style={{ padding: 0, display: 'flex' }}>
-                                            <div style={{ width: '65px', textAlign: 'center' }}><LogoutOutlinedIcon color='primary' /></div>
-                                            <div style={{ padding: '1px 0px 0px 10px' }}>
-                                                <Link href="/auth/signout" sx={{ color: 'inherit', textDecoration: "none" }}>
-                                                    <Typography textAlign="center" sx={{ fontSize: '14px', fontWeight: 'bolder' }} >Sign out</Typography>
-                                                </Link>
-                                            </div>
-                                        </div>}
-                                    </CardContent>
-                                </Card>
-                            </Menu>
                         </Box>
                     </Toolbar>
+                    <Drawer
+                        variant='temperory'
+                        anchor='right'
+                        open={openDrawer}
+                        onClose={() => setOpenDrawer(false)}
+                    >
+                        <Box
+                            sx={{ width: { xs: '100vw', md: '400px' } }}
+                            onClick={() => setOpenDrawer(false)}
+                            onKeyDown={() => setOpenDrawer(false)}
+                        >
+                            <List sx={{ padding: "20px" }}>
+                                <div style={{ display: 'flex', padding: "10px", justifyContent: "space-between" }}>
+                                    <div style={{ textAlign: "left" }}>
+                                        <Typography component="div" sx={{ fontSize: '20px', fontWeight: 'bolder' }}>
+                                            {session ? session.user?.username : 'N/A'}
+                                        </Typography>
+                                        <Typography component="div" sx={{ fontSize: '20px' }}>
+                                            {session ? session.user?.email : 'N/A'}
+                                        </Typography>
+                                    </div>
+                                    <Avatar sx={{ width: "60px", height: "60px", backgroundColor: "#9c409c", fontSize: "22px" }}>{getAbbr(session.user?.username)}</Avatar>
+                                </div>
+                                <Divider sx={{ mt: 2, mb: 2 }} />
+                                {session && <>
+                                    <div onClick={() => setOpenProfile(true)} style={{ display: 'flex', padding: "10px 10px" }}>
+                                        <div style={{ border: "2px solid #1976d2", borderRadius: "50%", padding: "10px 0", width: '50px', height: "50px", display: "flex", justifyContent: "center", alignItems: "center" }}><SettingsOutlinedIcon color='primary' /></div>
+                                        <div style={{ display: "flex", paddingLeft: "20px", alignItems: "center" }}>
+                                            <Typography component="div" sx={{ fontSize: '20px', cursor: 'pointer' }}>
+                                                Manage Account
+                                            </Typography>
+                                        </div>
+                                    </div>
+                                    <div style={{ display: 'flex', padding: "10px 10px" }}>
+                                        <div style={{ border: "2px solid #1976d2", borderRadius: "50%", padding: "10px 0", width: '50px', height: "50px", display: "flex", justifyContent: "center", alignItems: "center" }}><GTranslateOutlinedIcon color='primary' /></div>
+                                        <div style={{ display: "flex", paddingLeft: "20px", alignItems: "center" }}>
+                                            <Typography component="div" sx={{ fontSize: '20px', cursor: 'pointer' }}>
+                                                Language
+                                            </Typography>
+                                        </div>
+                                    </div>
+                                    <div style={{ display: 'flex', padding: "10px 10px" }}>
+                                        <div style={{ border: "2px solid #1976d2", borderRadius: "50%", padding: "10px 0", width: '50px', height: "50px", display: "flex", justifyContent: "center", alignItems: "center" }}><NotificationsActiveOutlinedIcon color='primary' /></div>
+                                        <div style={{ display: "flex", paddingLeft: "20px", alignItems: "center" }}>
+                                            <Typography component="div" sx={{ fontSize: '20px', cursor: 'pointer' }}>
+                                                Notifications
+                                            </Typography>
+                                        </div>
+                                    </div>
+                                    <Divider sx={{ mt: 2, mb: 2 }} />
+                                    <div style={{ display: 'flex', padding: "10px 10px" }}>
+                                        <div style={{ border: "2px solid #1976d2", borderRadius: "50%", padding: "10px 0", width: '50px', height: "50px", display: "flex", justifyContent: "center", alignItems: "center" }}><PolicyOutlinedIcon color='primary' /></div>
+                                        <div style={{ display: "flex", paddingLeft: "20px", alignItems: "center" }}>
+                                            <Typography component="div" sx={{ fontSize: '20px', cursor: 'pointer' }}>
+                                                Policy
+                                            </Typography>
+                                        </div>
+                                    </div>
+                                    <div style={{ display: 'flex', padding: "10px 10px" }}>
+                                        <div style={{ border: "2px solid #1976d2", borderRadius: "50%", padding: "10px 0", width: '50px', height: "50px", display: "flex", justifyContent: "center", alignItems: "center" }}><FeedbackOutlinedIcon color='primary' /></div>
+                                        <div style={{ display: "flex", paddingLeft: "20px", alignItems: "center" }}>
+                                            <Typography component="div" sx={{ fontSize: '20px', cursor: 'pointer' }}>
+                                                Feedback
+                                            </Typography>
+                                        </div>
+                                    </div>
+                                    <div style={{ display: 'flex', padding: "10px 10px" }}>
+                                        <div style={{ border: "2px solid #1976d2", borderRadius: "50%", padding: "10px 0", width: '50px', height: "50px", display: "flex", justifyContent: "center", alignItems: "center" }}><LogoutOutlinedIcon color='primary' /></div>
+                                        <div style={{ display: "flex", paddingLeft: "20px", alignItems: "center" }}>
+                                            <Link href="/auth/signout" sx={{ color: 'inherit', textDecoration: "none" }}>
+                                                <Typography textAlign="center" sx={{ fontSize: '20px' }} >Sign out</Typography>
+                                            </Link>
+                                        </div>
+                                    </div>
+                                </>}
+                            </List>
+                        </Box>
+                    </Drawer>
                     {openProfile && <ProfilePopup open={openProfile} handleClose={() => setOpenProfile(false)} session={session} />}
                 </Container>
             </AppBar >
