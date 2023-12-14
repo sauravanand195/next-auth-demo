@@ -240,14 +240,15 @@ function App() {
 
             {/* Customer Testimonials Section */}
             <div
+                ref={parallaxRef}
                 style={{
-                    background: 'url(https://images.pexels.com/photos/259915/pexels-photo-259915.jpeg?auto=compress&cs=tinysrgb&w=600) center/cover',
+                    background: 'url(https://images.pexels.com/photos/949587/pexels-photo-949587.jpeg?auto=compress&cs=tinysrgb&w=600) center/cover',
                     paddingTop: '40px',
                     paddingBottom: '40px',
-                    borderRadius: '10px',
+                    // borderRadius: '10px',
                 }}
             >
-                <Container style={{ backgroundColor: 'rgba(255, 255, 255, 0.8)', borderRadius: '10px' }}>
+                <Container style={{ backgroundColor: 'rgba(255, 255, 255, 0.8)', borderRadius: '10px', padding: "24px", marginBottom: "40px" }}>
                     <Typography variant="h5" component="div" align="center" style={{ marginBottom: '20px', fontWeight: 'bold' }}>
                         What Our Customers Say
                     </Typography>
@@ -266,18 +267,7 @@ function App() {
                         ))}
                     </Grid>
                 </Container>
-            </div>
-
-            {/* Product Benefits Section */}
-            <div
-                style={{
-                    background: 'url(https://images.pexels.com/photos/259915/pexels-photo-259915.jpeg?auto=compress&cs=tinysrgb&w=600) center/cover',
-                    paddingTop: '40px',
-                    paddingBottom: '40px',
-                    borderRadius: '10px',
-                }}
-            >
-                <Container style={{ backgroundColor: 'rgba(255, 255, 255, 0.8)', borderRadius: '10px' }}>
+                <Container style={{ backgroundColor: 'rgba(255, 255, 255, 0.8)', borderRadius: '10px', padding: "24px" }}>
                     <Typography variant="h5" component="div" align="center" style={{ marginBottom: '20px', fontWeight: 'bold' }}>
                         Key Product Benefits
                     </Typography>
