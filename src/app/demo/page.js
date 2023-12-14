@@ -34,7 +34,7 @@ const products = [
         id: 3,
         name: 'Product 3',
         description: 'Premium product for a premium experience.',
-        content: 'Suspendisse potenti. Duis id ultricies ipsum. Nunc vestibulum ligula eu velit pharetra, et finibus odio fringilla.',
+        content: 'Suspendisse potenti. Duis id ultricies ipsum. Nunc vestibulum ligula eu velit pharetra.',
     },
 ];
 
@@ -113,7 +113,18 @@ function App() {
                 <Grid container spacing={3}>
                     {products.map((product, index) => (
                         <Grid item xs={12} sm={6} md={4} key={product.id}>
-                            <Card>
+                            <Card
+                                elevation={4}
+                                style={{
+                                    marginBottom: '20px',
+                                    borderRadius: '12px',
+                                    overflow: 'hidden',
+                                    transition: 'transform 0.2s',
+                                    '&:hover': {
+                                        transform: 'scale(1.05)',
+                                    },
+                                }}
+                            >
                                 <img
                                     src={cardImages[index] || getRandomImage()} // Use a random image if fetching fails
                                     alt={`Product ${product.id}`}
