@@ -26,11 +26,12 @@ const NavBarComp = ({ session }) => {
             <AppBar position="static" sx={{ backgroundColor: "white" }}>
                 <Container maxWidth="xl">
                     <Toolbar disableGutters>
-                        <Typography variant="h6" noWrap component="a" sx={{ mr: 2, display: { xs: 'none', md: 'flex' }, fontSize: '1rem', fontFamily: 'monospace', fontWeight: 700, letterSpacing: '.1rem', color: 'black', textDecoration: 'none', }}>
-                            Techbook
+                        {/* <Typography variant="h6" noWrap component="a" sx={{ mr: 2, display: { xs: 'none', md: 'flex' }, fontSize: '1rem', fontFamily: 'monospace', fontWeight: 700, letterSpacing: '.1rem', color: 'black', textDecoration: 'none', }}> */}
+                        <Typography variant="h6" noWrap component="a" sx={{ mr: 2, display: { xs: 'none', md: 'flex' }, fontSize: "20px", fontWeight: "bold", fontFamily: "Arial,Helvetica, sans-serif", letterSpacing: '.1rem', background: "linear-gradient(to right, #f32170, #ff6b08,#cf23cf, #eedd44)", WebkitTextFillColor: "transparent", WebkitBackgroundClip: "text" }}>
+                            saurav.tech
                         </Typography>
-                        <Typography variant="h6" component="a" sx={{ display: { xs: 'flex', md: 'none' }, flexGrow: 1, fontSize: '1rem', fontFamily: 'monospace', fontWeight: 700, letterSpacing: '.2rem', color: 'black', textDecoration: 'none', textAlign: 'center' }}>
-                            Techbook
+                        <Typography sx={{ display: { xs: 'flex', md: 'none' }, flexGrow: 1, fontSize: "20px", fontWeight: "bold", fontFamily: "Arial,Helvetica, sans-serif", letterSpacing: '.1rem', background: "linear-gradient(to right, #f32170, #ff6b08,#cf23cf, #eedd44)", WebkitTextFillColor: "transparent", WebkitBackgroundClip: "text" }}>
+                            saurav.tech
                         </Typography>
                         <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                             <Link sx={{ color: 'inherit', textDecoration: "none" }}>

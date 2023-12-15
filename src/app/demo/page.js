@@ -82,6 +82,7 @@ function getRandomImage() {
 
 function App() {
     const parallaxRef = useRef(null);
+    const parallaxRef2 = useRef(null);
     const [cardImages, setCardImages] = useState([]);
 
     useEffect(() => {
@@ -107,7 +108,14 @@ function App() {
         const handleScroll = () => {
             if (parallaxRef.current) {
                 const scrollY = window.scrollY;
-                parallaxRef.current.style.backgroundPositionY = `${scrollY * 0.5}px`;
+                // Calculate the background position for each section
+                const backgroundPosition1 = `${scrollY * 0.5}px`;
+                const backgroundPosition2 = `${(scrollY - parallaxRef.current.offsetTop) * 0.5}px`;
+
+                // Apply background positions
+                parallaxRef.current.style.backgroundPositionY = backgroundPosition1;
+                // Add more sections as needed
+                parallaxRef2.current.style.backgroundPositionY = backgroundPosition2;
             }
         };
 
@@ -176,6 +184,7 @@ function App() {
                     backgroundSize: 'cover',
                     height: '300px', // Adjust the height based on your design
                     position: 'relative',
+                    borderRadius: '0px'
                 }}
             >
                 <Typography
@@ -240,7 +249,7 @@ function App() {
 
             {/* Customer Testimonials Section */}
             <div
-                ref={parallaxRef}
+                ref={parallaxRef2}
                 style={{
                     background: 'url(https://images.pexels.com/photos/949587/pexels-photo-949587.jpeg?auto=compress&cs=tinysrgb&w=600) center/cover',
                     paddingTop: '40px',
