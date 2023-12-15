@@ -35,10 +35,10 @@ const NavBarComp = ({ session }) => {
                         </Typography>
                         <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                             <Link sx={{ color: 'inherit', textDecoration: "none" }}>
-                                <Button sx={{ my: 2, color: 'black', display: 'block' }}>Testimonials</Button>
+                                <Button sx={{ my: 2, color: 'black', display: 'block' }}>Products</Button>
                             </Link>
                             <Link sx={{ color: 'inherit', textDecoration: "none" }}>
-                                <Button sx={{ my: 2, color: 'black', display: 'block' }}>About</Button>
+                                <Button sx={{ my: 2, color: 'black', display: 'block' }}>Testimonials</Button>
                             </Link>
                             <Link sx={{ color: 'inherit', textDecoration: "none" }}>
                                 <Button sx={{ my: 2, color: 'black', display: 'block' }}>Contact us</Button>
