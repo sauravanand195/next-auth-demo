@@ -51,7 +51,7 @@ const NavBarComp = ({ session }) => {
                         <Box sx={{ flexGrow: 0 }}>
                             <Tooltip title="Open settings">
                                 <IconButton onClick={() => setOpenDrawer(true)} sx={{ p: 0 }}>
-                                    {session ? <Avatar {...stringAvatar(session.user?.username, '#9c409c', '17px')} /> : <Avatar />}
+                                    {session ? <Avatar {...stringAvatar(session.user?.username, '#1976d2', '17px')} /> : <Avatar />}
                                 </IconButton>
                             </Tooltip>
                         </Box>
@@ -77,7 +77,7 @@ const NavBarComp = ({ session }) => {
                                             {session ? session.user?.email : 'N/A'}
                                         </Typography>
                                     </div>
-                                    <Avatar sx={{ width: "60px", height: "60px", backgroundColor: "#9c409c", fontSize: "22px" }}>{getAbbr(session.user?.username)}</Avatar>
+                                    <Avatar sx={{ width: "60px", height: "60px", backgroundColor: "#1976d2", fontSize: "22px" }}>{getAbbr(session.user?.username)}</Avatar>
                                 </div>
                                 <Divider sx={{ mt: 2, mb: 2 }} />
                                 {session && <>

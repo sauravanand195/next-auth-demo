@@ -184,23 +184,40 @@ function App() {
                     backgroundSize: 'cover',
                     height: '300px', // Adjust the height based on your design
                     position: 'relative',
-                    borderRadius: '0px'
+                    borderRadius: '0px',
+                    display: 'flex',
+                    justifyContent: "space-between",
+                    alignItems: 'stretch', // Ensure both sides take the full height
                 }}
             >
-                <Typography
-                    variant="h3"
-                    component="div"
-                    style={{
-                        position: 'absolute',
-                        top: '50%',
-                        left: '50%',
-                        transform: 'translate(-50%, -50%)',
-                        color: 'white',
-                        textAlign: 'center',
-                    }}
-                >
-                    Welcome to My Awesome Store
-                </Typography>
+                <Grid item xs={6} sm={6} md={6} style={{ padding: '0 20px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                    <Typography
+                        variant="h4"
+                        component="div"
+                        style={{ color: 'white', fontWeight: "bold" }}
+                    >
+                        Welcome to My Awesome Store
+                    </Typography>
+                </Grid>
+                {/* <Grid item xs={6} sm={6} md={6} sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                    <img
+                        src={getRandomImage()}
+                        alt="Slider Image"
+                        style={{ width: '80%', height: '80%', objectFit: 'cover', borderRadius: '5px' }}
+                    />
+                </Grid> */}
+                <Grid item xs={6} sm={6} md={6} sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                    {/* Video element */}
+                    <video
+                        src="/testvid.mp4" // Replace with the actual path to your video file
+                        type="video/mp4"
+                        controls
+                        controlsList="nodownload nofullscreen"
+                        style={{ width: '100%', height: '80%', objectFit: 'cover', borderRadius: '5px', paddingLeft: "10px" }}
+                    >
+                        Your browser does not support the video tag.
+                    </video>
+                </Grid>
             </Paper>
 
             <Container style={{ paddingTop: '20px' }}>
