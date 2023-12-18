@@ -44,14 +44,14 @@ const NavBarComp = ({ session }) => {
                                 <Button sx={{ my: 2, color: 'black', display: 'block' }}>Contact us</Button>
                             </Link>
                         </Box>
-                        {session && session.user?.email
+                        {session && session?.user?.email
                             ? '' : <Button onClick={() => { router.push('/auth/signin') }} sx={{ color: 'black', display: 'block' }}>Sign in</Button>
-                            // <Button sx={{ color: 'white', display: 'block' }}><b>{session.user?.username}</b></Button>
+                            // <Button sx={{ color: 'white', display: 'block' }}><b>{session?.user?.username}</b></Button>
                         }
                         <Box sx={{ flexGrow: 0 }}>
                             <Tooltip title="Open settings">
                                 <IconButton onClick={() => setOpenDrawer(true)} sx={{ p: 0 }}>
-                                    {session ? <Avatar {...stringAvatar(session.user?.username, '#1976d2', '17px')} /> : <Avatar />}
+                                    {session ? <Avatar {...stringAvatar(session?.user?.username, '#1976d2', '17px')} /> : <Avatar />}
                                 </IconButton>
                             </Tooltip>
                         </Box>
@@ -71,13 +71,13 @@ const NavBarComp = ({ session }) => {
                                 <div style={{ display: 'flex', padding: "10px", justifyContent: "space-between" }}>
                                     <div style={{ textAlign: "left" }}>
                                         <Typography component="div" sx={{ fontSize: '20px', fontWeight: 'bolder' }}>
-                                            {session ? session.user?.username : 'N/A'}
+                                            {session ? session?.user?.username : 'N/A'}
                                         </Typography>
                                         <Typography component="div" sx={{ fontSize: '20px' }}>
-                                            {session ? session.user?.email : 'N/A'}
+                                            {session ? session?.user?.email : 'N/A'}
                                         </Typography>
                                     </div>
-                                    <Avatar sx={{ width: "60px", height: "60px", backgroundColor: "#1976d2", fontSize: "22px" }}>{getAbbr(session.user?.username)}</Avatar>
+                                    <Avatar sx={{ width: "60px", height: "60px", backgroundColor: "#1976d2", fontSize: "22px" }}>{getAbbr(session?.user?.username)}</Avatar>
                                 </div>
                                 <Divider sx={{ mt: 2, mb: 2 }} />
                                 {session && <>
