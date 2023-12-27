@@ -6,20 +6,22 @@ import TaskCards from '../components/todo/taskCards';
 import TaskPopup from '../components/todo/taskPopup';
 import FooterTodo from '../components/todo/footerTodo';
 import { CustomToolTip } from '../../../public/js/commonFun';
+import { BASE_API_URL } from '@/utils/constants';
 
 const Index = () => {
     const [open, setOpen] = useState(false)
     const [todoData, setTodoData] = useState([])
 
     const fetchData = async () => {
-        const response = await fetch(`/api/todo`)
+        const response = await fetch(`${BASE_API_URL}/api/todo`)
+        console.log('response', response);
         const responseObj = await response.json()
         setTodoData(responseObj?.results)
     }
 
     useEffect(() => {
         const loadData = async () => {
-            const response = await fetch(`/api/todo`)
+            const response = await fetch(`${BASE_API_URL}/api/todo`)
             const responseObj = await response.json()
             setTodoData(responseObj?.results)
         }

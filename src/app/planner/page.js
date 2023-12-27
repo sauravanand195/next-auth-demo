@@ -9,6 +9,7 @@ import { CustomToolTip } from '../../../public/js/commonFun';
 import FilterDramaOutlinedIcon from '@mui/icons-material/FilterDramaOutlined';
 import AirOutlinedIcon from '@mui/icons-material/AirOutlined';
 import PlannerList from '../components/todo/plannerList';
+import { BASE_API_URL } from '@/utils/constants';
 
 const Index = () => {
     const [open, setOpen] = useState(false)
@@ -18,7 +19,7 @@ const Index = () => {
     const [position, setPosition] = useState({ latitude: "", longitude: "" });
 
     const fetchData = async () => {
-        const response = await fetch(`/api/todo`)
+        const response = await fetch(`${BASE_API_URL}/api/todo`)
         const responseObj = await response.json()
         setTodoData(responseObj?.results)
     }
@@ -36,7 +37,7 @@ const Index = () => {
 
     useEffect(() => {
         const loadData = async () => {
-            const response = await fetch(`/api/todo`)
+            const response = await fetch(`${BASE_API_URL}/api/todo`)
             const responseObj = await response.json()
             setTodoData(responseObj?.results)
         }

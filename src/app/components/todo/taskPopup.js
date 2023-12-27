@@ -9,6 +9,7 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { FormControl, FormControlLabel, FormLabel, Radio, RadioGroup } from '@mui/material';
 import axios from 'axios';
+import { BASE_API_URL } from '@/utils/constants';
 
 const TaskPopup = ({ open, setOpen, fetchData, action, selectedTask }) => {
     const [inputData, setInputData] = useState({ task: selectedTask ? selectedTask.task : "", description: selectedTask ? selectedTask.description : "", priority: selectedTask ? selectedTask.priority : "", status: "" })
@@ -21,7 +22,7 @@ const TaskPopup = ({ open, setOpen, fetchData, action, selectedTask }) => {
     const createTask = async () => {
         const paramsToPass = { ...inputData, status: "incomplete" }
         try {
-            const response = await axios.post(`/api/todo`, paramsToPass)
+            const response = await axios.post(`${BASE_API_URL}/api/todo`, paramsToPass)
             if (response?.data?.status == true) {
                 console.log('Data added successfully')
                 handleClose()
@@ -34,7 +35,7 @@ const TaskPopup = ({ open, setOpen, fetchData, action, selectedTask }) => {
 
     const updateTask = async () => {
         try {
-            const response = await axios.put(`/api/todo`, { ...inputData, id: selectedTask.id })
+            const response = await axios.put(`${BASE_API_URL}/api/todo`, { ...inputData, id: selectedTask.id })
             if (response?.data?.status == true) {
                 console.log('Data updated successfully')
                 handleClose()

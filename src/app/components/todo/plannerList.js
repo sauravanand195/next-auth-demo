@@ -11,6 +11,7 @@ import { useState } from "react";
 import TaskPopup from "./taskPopup";
 import { CustomToolTip, stringAvatar } from "../../../../public/js/commonFun";
 import Chip from '@mui/material/Chip';
+import { BASE_API_URL } from "@/utils/constants";
 
 const PlannerList = ({ todoData, fetchData }) => {
     const [openPopup, setOpenPopup] = useState(false)
@@ -19,7 +20,7 @@ const PlannerList = ({ todoData, fetchData }) => {
 
     const updatestatus = async (val) => {
         try {
-            const response = await axios.put(`/api/todo`, { id: val.id, task: val.task, description: val.description, priority: val.priority, status: (val.status == 'incomplete') ? 'complete' : 'incomplete' })
+            const response = await axios.put(`${BASE_API_URL}/api/todo`, { id: val.id, task: val.task, description: val.description, priority: val.priority, status: (val.status == 'incomplete') ? 'complete' : 'incomplete' })
             if (response?.data?.status == true) {
                 console.log('Data updated successfully')
                 fetchData()
@@ -39,7 +40,7 @@ const PlannerList = ({ todoData, fetchData }) => {
 
     const deleteTask = async (id) => {
         try {
-            const response = await axios.delete(`/api/todo`, { data: { id: id } })
+            const response = await axios.delete(`${BASE_API_URL}/api/todo`, { data: { id: id } })
             if (response?.data?.status == true) {
                 console.log('Data deleted successfully')
                 fetchData()
