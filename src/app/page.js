@@ -16,9 +16,7 @@ import {
     TextField,
     Snackbar,
 } from '@mui/material';
-import GitHubIcon from '@mui/icons-material/GitHub';
-import TwitterIcon from '@mui/icons-material/Twitter';
-import FacebookIcon from '@mui/icons-material/Facebook';
+
 
 const products = [
     {
@@ -206,14 +204,14 @@ function App() {
                         style={{ width: '80%', height: '80%', objectFit: 'cover', borderRadius: '5px' }}
                     />
                 </Grid> */}
-                <Grid item xs={6} sm={6} md={6} sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                <Grid item xs={6} sm={6} md={6} sx={{ display: "flex", justifyContent: "center", alignItems: "center", paddingRight: "10px" }}>
                     {/* Video element */}
                     <video
-                        src="/testvid.mp4" // Replace with the actual path to your video file
+                        src="/advertise.mp4" // Replace with the actual path to your video file
                         type="video/mp4"
                         controls
                         controlsList="nodownload nofullscreen"
-                        style={{ width: '100%', height: '80%', objectFit: 'cover', borderRadius: '5px', paddingLeft: "10px" }}
+                        style={{ width: '100%', height: '80%', objectFit: 'cover', borderRadius: '0px' }}
                     >
                         Your browser does not support the video tag.
                     </video>
@@ -379,32 +377,6 @@ function App() {
                     anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
                 />
             </Container>
-
-            <Paper elevation={3} style={{ marginTop: '20px', padding: '20px' }}>
-                <Typography variant="body2" color="text.secondary" align="center">
-                    &copy; {new Date().getFullYear()} My Product Store
-                </Typography>
-                <div style={{ display: 'flex', justifyContent: 'center', marginTop: '10px' }}>
-                    <IconButton color="primary" href="#" target="_blank">
-                        <GitHubIcon />
-                    </IconButton>
-                    <IconButton color="primary" href="#" target="_blank">
-                        <TwitterIcon />
-                    </IconButton>
-                    <IconButton color="primary" href="#" target="_blank">
-                        <FacebookIcon />
-                    </IconButton>
-                </div>
-                <Typography variant="body2" color="text.secondary" align="center">
-                    <Link color="inherit" href="#">
-                        Privacy Policy
-                    </Link>{' '}
-                    |{' '}
-                    <Link color="inherit" href="#">
-                        Terms of Service
-                    </Link>
-                </Typography>
-            </Paper>
         </div>
     );
 }
