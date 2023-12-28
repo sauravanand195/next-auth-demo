@@ -200,7 +200,7 @@ function App() {
                     <Typography
                         variant="h4"
                         component="div"
-                        style={{ color: 'white', fontWeight: "bold" }}
+                        style={{ color: 'white', fontWeight: "bold", textShadow: '4px 4px 4px rgba(0, 0, 0, 0.8)', }}
                     >
                         Welcome to My Awesome Store
                     </Typography>
@@ -389,7 +389,7 @@ function App() {
                     anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
                 />
             </Container>
-        </div>
+        </div >
     );
 }
 
