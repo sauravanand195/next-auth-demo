@@ -16,26 +16,29 @@ import {
     TextField,
     Snackbar,
 } from '@mui/material';
-
+import { useRouter } from 'next/navigation';
 
 const products = [
     {
         id: 1,
-        name: 'Product 1',
-        description: 'High-quality product with amazing features.',
-        content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac justo id orci bibendum porttitor in ut velit.',
+        name: 'Todo App',
+        description: 'Organize your work and life, finally.',
+        content: 'Maintain your day-to-day tasks or list everything that you have to do, with the most important tasks at the top of the list, and the least important tasks at the bottom.',
+        action: 'Start Organising',
     },
     {
         id: 2,
-        name: 'Product 2',
-        description: 'Innovative solution for your needs.',
-        content: 'Pellentesque ut ipsum at purus eleifend commodo. Vestibulum ut est ac ligula euismod tincidunt.',
+        name: 'Shopping App',
+        description: 'Shop online with great deals over a wide range of products.',
+        content: 'Enjoy unlimited Free Shipping, early access to Lightning Deals and more. Explore deals on top categories like Electronics, Fashion & more online today! Best Deals. Low Prices. No Cost EMI Available.',
+        action: 'Start Shopping',
     },
     {
         id: 3,
         name: 'Product 3',
         description: 'Premium product for a premium experience.',
         content: 'Suspendisse potenti. Duis id ultricies ipsum. Nunc vestibulum ligula eu velit pharetra.',
+        action: 'View Details',
     },
 ];
 
@@ -79,6 +82,7 @@ function getRandomImage() {
 }
 
 function App() {
+    const router = useRouter();
     const parallaxRef = useRef(null);
     const parallaxRef2 = useRef(null);
     const [cardImages, setCardImages] = useState([]);
@@ -243,30 +247,35 @@ function App() {
                                     marginBottom: '20px',
                                     borderRadius: '5px',
                                     overflow: 'hidden',
+                                    minHeight: "480px",
                                     transition: 'transform 0.2s',
                                     boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
                                     '&:hover': {
                                         transform: 'scale(1.05)',
                                         boxShadow: '0 8px 16px rgba(0, 0, 0, 0.2)',
                                     },
+                                    display: 'flex',
+                                    flexDirection: 'column',
                                 }}
                             >
                                 <img
-                                    src={cardImages[index] || getRandomImage()} // Use a random image if fetching fails
+                                    src={cardImages[index] || getRandomImage()}
                                     alt={`Product ${product.id}`}
                                     style={{ width: '100%', height: '200px', objectFit: 'cover' }}
                                 />
-                                <CardContent>
+                                <CardContent style={{ flex: 1, display: 'flex', flexDirection: 'column', paddingBottom: "20px" }}>
                                     <Typography variant="h5" component="div">
                                         {product.name}
                                     </Typography>
                                     <Typography color="text.secondary">{product.description}</Typography>
-                                    <Typography variant="body2" color="text.secondary" style={{ marginTop: '10px' }}>
+                                    <Typography variant="body2" color="text.secondary" style={{ marginTop: '10px', flex: 1 }}>
                                         {product.content}
                                     </Typography>
-                                    <Button variant="contained" color="primary" style={{ marginTop: '10px' }}>
-                                        View Details
-                                    </Button>
+                                    <div style={{ marginTop: '10px' }}>
+                                        <Button variant="contained" color="primary" onClick={() => { router.push('/todo') }}>
+                                            {product.action}
+                                        </Button>
+                                    </div>
                                 </CardContent>
                             </Card>
                         </Grid>

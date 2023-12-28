@@ -31,7 +31,7 @@ const ProductsPage = () => {
                         Shop online with great deals over a wide range of products.
                     </Typography>
                     <Typography variant="h7" align="left" color="text.secondary" paragraph>
-                        Enjoy unlimited Free Shipping, early access to Lightning Deals and more. Explore deals on top categories like Electronics, Fashion & more online today! Best Deals. Low Prices. No Cost EMI Available.                    </Typography>
+                        Enjoy unlimited Free Shipping, early access to Lightning Deals and more. Explore deals on top categories like Electronics, Fashion & more online today! Best Deals. Low Prices. No Cost EMI Available.</Typography>
                 </Grid>
                 <Grid item sm={3}>
                     <div style={{ position: 'relative', top: '45%', left: '50%', transform: "translate(-50%, -50%)" }}>

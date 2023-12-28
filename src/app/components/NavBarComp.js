@@ -5,7 +5,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import ProfilePopup from './ProfilePopup';
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { stringAvatar } from '../../../public/js/commonFun';
 import GTranslateOutlinedIcon from '@mui/icons-material/GTranslateOutlined';
 import NotificationsActiveOutlinedIcon from '@mui/icons-material/NotificationsActiveOutlined';
@@ -14,6 +14,7 @@ import FeedbackOutlinedIcon from '@mui/icons-material/FeedbackOutlined';
 
 const NavBarComp = ({ session }) => {
     const router = useRouter();
+    const pathname = usePathname();
     const [openProfile, setOpenProfile] = useState(false);
     const [openDrawer, setOpenDrawer] = useState(false)
 
@@ -27,22 +28,26 @@ const NavBarComp = ({ session }) => {
                 <Container maxWidth="xl">
                     <Toolbar disableGutters>
                         {/* <Typography variant="h6" noWrap component="a" sx={{ mr: 2, display: { xs: 'none', md: 'flex' }, fontSize: '1rem', fontFamily: 'monospace', fontWeight: 700, letterSpacing: '.1rem', color: 'black', textDecoration: 'none', }}> */}
-                        <Typography variant="h6" noWrap component="a" sx={{ mr: 2, display: { xs: 'none', md: 'flex' }, fontSize: "20px", fontWeight: "bold", fontFamily: "Arial,Helvetica, sans-serif", letterSpacing: '.1rem', background: "linear-gradient(to right, #f32170, #ff6b08,#cf23cf, #eedd44)", WebkitTextFillColor: "transparent", WebkitBackgroundClip: "text" }}>
+                        <Typography variant="h6" noWrap component="a" sx={{ cursor: "pointer", mr: 2, display: { xs: 'none', md: 'flex' }, fontSize: "20px", fontWeight: "bold", fontFamily: "Arial,Helvetica, sans-serif", letterSpacing: '.1rem', background: "linear-gradient(to right, #f32170, #ff6b08,#cf23cf, #eedd44)", WebkitTextFillColor: "transparent", WebkitBackgroundClip: "text" }}
+                            onClick={() => { router.push('/') }}>
                             saurav.tech
                         </Typography>
-                        <Typography sx={{ display: { xs: 'flex', md: 'none' }, flexGrow: 1, fontSize: "20px", fontWeight: "bold", fontFamily: "Arial,Helvetica, sans-serif", letterSpacing: '.1rem', background: "linear-gradient(to right, #f32170, #ff6b08,#cf23cf, #eedd44)", WebkitTextFillColor: "transparent", WebkitBackgroundClip: "text" }}>
+                        <Typography sx={{ cursor: "pointer", display: { xs: 'flex', md: 'none' }, flexGrow: 1, fontSize: "20px", fontWeight: "bold", fontFamily: "Arial,Helvetica, sans-serif", letterSpacing: '.1rem', background: "linear-gradient(to right, #f32170, #ff6b08,#cf23cf, #eedd44)", WebkitTextFillColor: "transparent", WebkitBackgroundClip: "text" }}
+                            onClick={() => { router.push('/') }}>
                             saurav.tech
                         </Typography>
                         <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-                            <Link sx={{ color: 'inherit', textDecoration: "none" }}>
-                                <Button sx={{ my: 2, color: 'black', display: 'block' }}>Products</Button>
-                            </Link>
-                            <Link sx={{ color: 'inherit', textDecoration: "none" }}>
-                                <Button sx={{ my: 2, color: 'black', display: 'block' }}>Testimonials</Button>
-                            </Link>
-                            <Link sx={{ color: 'inherit', textDecoration: "none" }}>
-                                <Button sx={{ my: 2, color: 'black', display: 'block' }}>Contact us</Button>
-                            </Link>
+                            {pathname == '/' && <>
+                                <Link sx={{ color: 'inherit', textDecoration: "none" }}>
+                                    <Button sx={{ my: 2, color: 'black', display: 'block' }}>Products</Button>
+                                </Link>
+                                <Link sx={{ color: 'inherit', textDecoration: "none" }}>
+                                    <Button sx={{ my: 2, color: 'black', display: 'block' }}>Testimonials</Button>
+                                </Link>
+                                <Link sx={{ color: 'inherit', textDecoration: "none" }}>
+                                    <Button sx={{ my: 2, color: 'black', display: 'block' }}>Contact us</Button>
+                                </Link>
+                            </>}
                         </Box>
                         {session && session?.user?.email
                             ? '' : <Button onClick={() => { router.push('/auth/signin') }} sx={{ color: 'black', display: 'block' }}>Sign in</Button>

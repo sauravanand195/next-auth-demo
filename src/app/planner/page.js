@@ -4,7 +4,6 @@ import { CssBaseline, Stack, Typography, Container, Box, Button, Fab } from '@mu
 import AddOutlined from '@mui/icons-material/AddOutlined';
 import AddIcon from '@mui/icons-material/Add';
 import TaskPopup from '../components/todo/taskPopup';
-import FooterTodo from '../components/todo/footerTodo';
 import { CustomToolTip } from '../../../public/js/commonFun';
 import FilterDramaOutlinedIcon from '@mui/icons-material/FilterDramaOutlined';
 import AirOutlinedIcon from '@mui/icons-material/AirOutlined';
@@ -126,7 +125,6 @@ const Index = () => {
                 </Stack>
                 <PlannerList todoData={todoData} fetchData={fetchData} />
             </main>
-            <FooterTodo />
             <style jsx>{`
                 .calslots.calTab_outer{overflow-x: scroll; overflow-y: hidden; position:relative;background-color:#e1bbbb1f;}
                 .calslots.calTab_outer .calslotitem{border:0; width:auto; white-space: nowrap;position: relative;padding:10px 15px;fontSize:14px; text-align: center;}
