@@ -99,6 +99,14 @@ function App() {
             }
         };
 
+        // Play the video when the component mounts
+        // const videoElement = document.getElementById('videoElement');
+        // if (videoElement) {
+        //     videoElement.play().catch((error) => {
+        //         console.error('Error playing video:', error);
+        //     });
+        // }
+
         fetchCardImages();
     }, []);
 
@@ -198,18 +206,23 @@ function App() {
                     </Typography>
                 </Grid>
                 <Grid item xs={6} sm={6} md={6} sx={{ display: "flex", justifyContent: "center", alignItems: "center", paddingRight: "10px", position: 'relative', overflow: 'hidden' }}>
-                    {/* Video element */}
+                    {/* Video element without default controls */}
                     <video
+                        id="videoElement"
                         src="/advertise.mp4" // Replace with the actual path to your video file
                         type="video/mp4"
                         controls
                         controlsList="nodownload nofullscreen"
+                        autoPlay
+                        // playsInline
+                        muted  // Mute the video to autoplay without user interaction
                         style={{
                             width: '100%',
                             height: '80%',
                             objectFit: 'cover',
                             borderRadius: '5px',
                             boxShadow: '26px 30px 20px rgba(0, 0, 0, 0.4)', // Apply a shadow for depth
+                            cursor: 'pointer',
                         }}
                     >
                         Your browser does not support the video tag.
