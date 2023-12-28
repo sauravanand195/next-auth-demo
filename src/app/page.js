@@ -197,21 +197,20 @@ function App() {
                         Welcome to My Awesome Store
                     </Typography>
                 </Grid>
-                {/* <Grid item xs={6} sm={6} md={6} sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-                    <img
-                        src={getRandomImage()}
-                        alt="Slider Image"
-                        style={{ width: '80%', height: '80%', objectFit: 'cover', borderRadius: '5px' }}
-                    />
-                </Grid> */}
-                <Grid item xs={6} sm={6} md={6} sx={{ display: "flex", justifyContent: "center", alignItems: "center", paddingRight: "10px" }}>
+                <Grid item xs={6} sm={6} md={6} sx={{ display: "flex", justifyContent: "center", alignItems: "center", paddingRight: "10px", position: 'relative', overflow: 'hidden' }}>
                     {/* Video element */}
                     <video
                         src="/advertise.mp4" // Replace with the actual path to your video file
                         type="video/mp4"
                         controls
                         controlsList="nodownload nofullscreen"
-                        style={{ width: '100%', height: '80%', objectFit: 'cover', borderRadius: '0px' }}
+                        style={{
+                            width: '100%',
+                            height: '80%',
+                            objectFit: 'cover',
+                            borderRadius: '5px',
+                            boxShadow: '26px 30px 20px rgba(0, 0, 0, 0.4)', // Apply a shadow for depth
+                        }}
                     >
                         Your browser does not support the video tag.
                     </video>
