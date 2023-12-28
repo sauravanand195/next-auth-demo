@@ -13,12 +13,12 @@ const SignUpForm = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [message, setMessage] = useState('')
-    const [snack, setSnack] = useState(false)
+    const [snack, setSnack] = useState("")
 
     const handleSubmit = async () => {
         setMessage('Signing up ...')
-        await signUp(firstName, lastName, email, password)
-        setSnack(true)
+        const res = await signUp(firstName, lastName, email, password)
+        setSnack(res)
         setTimeout(() => {
             router.push('/auth/signin')
         }, 1000);
@@ -86,7 +86,7 @@ const SignUpForm = () => {
                         </Grid>
                     </Grid>
                 </Box>
-                {snack && <AlertComp severity="success" text="Successfully created new user" />}
+                {snack && <AlertComp severity="success" text={snack} />}
             </Box>
         </Container>
     )
