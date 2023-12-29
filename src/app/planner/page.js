@@ -125,14 +125,14 @@ const Index = () => {
                 </Stack>
                 <PlannerList todoData={todoData} fetchData={fetchData} />
             </main>
-            <style jsx>{`
+            {/* <style jsx>{`
                 .calslots.calTab_outer{overflow-x: scroll; overflow-y: hidden; position:relative;background-color:#e1bbbb1f;}
                 .calslots.calTab_outer .calslotitem{border:0; width:auto; white-space: nowrap;position: relative;padding:10px 15px;fontSize:14px; text-align: center;}
                 .calslots.calTab_outer .active{box-shadow: 0px 10px 15px 0px #e66465; font-size: 15px !important;}
                 .wrapper-flex{display:flex;width:100%;}
                 .calslotitem{width:70px;border-radius:4px;border:solid 1px #d4dbe0;display:inline-block;margin-right:13px;padding:5px 0;}
                 .text-center{text-align: center;}
-            `}</style>
+            `}</style> */}
         </div>
     );
 }

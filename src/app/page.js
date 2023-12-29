@@ -25,6 +25,7 @@ const products = [
         description: 'Organize your work and life, finally.',
         content: 'Maintain your day-to-day tasks or list everything that you have to do, with the most important tasks at the top of the list, and the least important tasks at the bottom.',
         action: 'Start Organising',
+        route: '/todo',
     },
     {
         id: 2,
@@ -32,13 +33,15 @@ const products = [
         description: 'Shop online with great deals over a wide range of products.',
         content: 'Enjoy unlimited Free Shipping, early access to Lightning Deals and more. Explore deals on top categories like Electronics, Fashion & more online today! Best Deals. Low Prices. No Cost EMI Available.',
         action: 'Start Shopping',
+        route: '/shopping',
     },
     {
-        id: 3,
-        name: 'Product 3',
-        description: 'Premium product for a premium experience.',
-        content: 'Suspendisse potenti. Duis id ultricies ipsum. Nunc vestibulum ligula eu velit pharetra.',
-        action: 'View Details',
+        id: 1,
+        name: 'Planner App',
+        description: 'Organize your work and life, finally.',
+        content: 'Maintain your day-to-day tasks or list everything that you have to do, with the most important tasks at the top of the list, and the least important tasks at the bottom.',
+        action: 'Start Planning',
+        route: '/planner',
     },
 ];
 
@@ -272,7 +275,7 @@ function App() {
                                         {product.content}
                                     </Typography>
                                     <div style={{ marginTop: '10px' }}>
-                                        <Button variant="contained" color="primary" onClick={() => { router.push('/todo') }}>
+                                        <Button variant="contained" color="primary" onClick={() => { router.push(product.route) }}>
                                             {product.action}
                                         </Button>
                                     </div>
