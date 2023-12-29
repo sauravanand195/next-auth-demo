@@ -92,7 +92,7 @@ const Index = () => {
                             {address?.city}, {address?.principalSubdivision}
                         </Typography>
                     </Box>
-                    <div className="calslots calTab_outer wrapper-flex">
+                    {/* <div className="calslots calTab_outer wrapper-flex">
                         <div className="calslotitem">
                             <div style={{ color: "#fff" }}>Mon</div>
                             <div style={{ color: "#fff" }}>01</div>
@@ -121,7 +121,7 @@ const Index = () => {
                             <div style={{ color: "#fff" }}>Sun</div>
                             <div style={{ color: "#fff" }}>07</div>
                         </div>
-                    </div>
+                    </div> */}
                 </Stack>
                 <PlannerList todoData={todoData} fetchData={fetchData} />
             </main>

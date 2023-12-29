@@ -20,8 +20,10 @@ const TaskPopup = ({ open, setOpen, fetchData, action, selectedTask }) => {
 
     const createTask = async () => {
         const paramsToPass = { ...inputData, status: "incomplete" }
+        console.log('paramsToPass', paramsToPass);
         try {
             const response = await axios.post('/api/todo', paramsToPass)
+            console.log('response', response);
             if (response?.data?.status == true) {
                 console.log('Data added successfully')
                 handleClose()
@@ -34,7 +36,7 @@ const TaskPopup = ({ open, setOpen, fetchData, action, selectedTask }) => {
 
     const updateTask = async () => {
         try {
-            const response = await axios.put('/api/todo', { ...inputData, id: selectedTask.id })
+            const response = await axios.put('/api/todo', { ...inputData, status: "incomplete", id: selectedTask.id })
             if (response?.data?.status == true) {
                 console.log('Data updated successfully')
                 handleClose()

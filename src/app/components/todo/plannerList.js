@@ -11,6 +11,10 @@ import { useState } from "react";
 import TaskPopup from "./taskPopup";
 import { CustomToolTip, stringAvatar } from "../../../../public/js/commonFun";
 import Chip from '@mui/material/Chip';
+import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
+import Favorite from '@mui/icons-material/Favorite';
+import AssignmentTurnedInOutlinedIcon from '@mui/icons-material/AssignmentTurnedInOutlined';
+import AssignmentTurnedInSharpIcon from '@mui/icons-material/AssignmentTurnedInSharp';
 
 const PlannerList = ({ todoData, fetchData }) => {
     const [openPopup, setOpenPopup] = useState(false)
@@ -57,50 +61,21 @@ const PlannerList = ({ todoData, fetchData }) => {
     return (
         <Container maxWidth="lg" sx={{ padding: "10px 10px" }}>
             {openPopup && <TaskPopup open={openPopup} setOpen={setOpenPopup} fetchData={fetchData} selectedTask={selectedTask} action="update" />}
-
-            {/* <Grid container spacing={4}>
-                {todoData?.map((val, ind) => (
-                    <Grid item key={ind} xs={12} sm={6} md={4}>
-                        <Card
-                            sx={{ height: '100%', display: 'flex', flexDirection: 'column', backgroundColor: (val.status == 'complete') ? 'lightgray' : '' }}
-                        >
-                            <CardHeader
-                                action={
-                                    <IconButton>
-                                        <CustomToolTip placement="top" arrow title={val.priority} leaveDelay={500}>
-                                            <BookmarksIcon sx={{ color: getPCode(val.priority) }} />
-                                        </CustomToolTip>
-                                    </IconButton>
-                                }
-                                title={<FormGroup>
-                                    <Tooltip placement='top-start' title={`${val.status == 'complete' ? 'Mark In-complete' : 'Mark Complete'}`} leaveDelay={200}>
-                                        <FormControlLabel control={<Checkbox
-                                            checked={val.status == 'complete'}
-                                            onChange={() => updatestatus(val)}
-                                            icon={<LabelOutlinedIcon />}
-                                            checkedIcon={<LabelIcon />}
-                                        />} label={val.task} />
-                                    </Tooltip>
-                                </FormGroup>}
-                            />
-                            <CardContent sx={{ flexGrow: 1 }}>
-                                <Typography>{val.description}</Typography>
-                            </CardContent>
-                            <CardActions>
-                                <IconButton onClick={() => editTask(val)}><EditIcon /></IconButton>
-                                <IconButton onClick={() => { deleteTask(val.id) }}><DeleteIcon /></IconButton>
-                            </CardActions>
-                        </Card>
-                    </Grid>
-                ))}
-            </Grid> */}
             <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
                 {todoData?.map((val, ind) => (
                     <ListItem alignItems="flex-start" sx={{ pb: 2 }}
                         secondaryAction={
                             <div style={{ marginTop: "-40px", marginRight: "-30px" }}>
-                                <IconButton onClick={() => editTask(val)}><EditIcon /></IconButton>
-                                <IconButton onClick={() => { deleteTask(val.id) }}><DeleteIcon /></IconButton>
+                                <IconButton disabled={val.status == 'complete'} onClick={() => editTask(val)}><EditIcon /></IconButton>
+                                <IconButton disabled={val.status == 'complete'} onClick={() => { deleteTask(val.id) }}><DeleteIcon /></IconButton>
+                                <Tooltip placement='top-start' title={`${val.status == 'complete' ? 'Mark In-complete' : 'Mark Complete'}`} leaveDelay={200}>
+                                    <Checkbox
+                                        checked={val.status == 'complete'}
+                                        onChange={() => updatestatus(val)}
+                                        icon={<AssignmentTurnedInOutlinedIcon />}
+                                        checkedIcon={<AssignmentTurnedInSharpIcon />}
+                                    />
+                                </Tooltip>
                             </div>
                         }
                         disablePadding
@@ -109,7 +84,7 @@ const PlannerList = ({ todoData, fetchData }) => {
                             <Avatar {...stringAvatar(val.task, '#9c409c', '17px')} />
                         </ListItemAvatar>
                         <ListItemText
-                            primary={<Typography sx={{ fontWeight: "bold" }}>{val.task}</Typography>}
+                            primary={<Typography sx={{ fontWeight: "bold", textDecoration: (val.status == 'complete') ? 'line-through' : '' }}>{val.task}</Typography>}
                             secondary={<>
                                 <Typography sx={{ fontWeight: "normal", mb: 1 }}>{val.description}</Typography>
                                 <Chip label={val.priority} size="small" color={getPCode(val.priority)} />

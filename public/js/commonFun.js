@@ -19,6 +19,6 @@ export const stringAvatar = (name, bgcolor, fontSize) => {
             fontSize: fontSize,
             lineHeight: '0'
         },
-        children: `${name?.split(' ')[0][0].toUpperCase()}${name?.split(' ')[1][0].toUpperCase()}`,
+        children: name?.split(' ').length > '1' ? `${name?.split(' ')[0][0].toUpperCase()}${name?.split(' ')?.[1]?.[0]?.toUpperCase()}` : `${name?.split(' ')[0][0].toUpperCase()}`,
     };
 }
