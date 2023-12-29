@@ -61,7 +61,7 @@ const PlannerList = ({ todoData, fetchData }) => {
     return (
         <Container maxWidth="lg" sx={{ padding: "10px 10px" }}>
             {openPopup && <TaskPopup open={openPopup} setOpen={setOpenPopup} fetchData={fetchData} selectedTask={selectedTask} action="update" />}
-            <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+            <List sx={{ width: '100%', bgcolor: 'background.paper' }}>
                 {todoData?.map((val, ind) => (
                     <ListItem alignItems="flex-start" sx={{ pb: 2 }}
                         secondaryAction={
