@@ -80,6 +80,10 @@ const Index = () => {
     };
 
     useEffect(() => {
+        window.history.scrollRestoration = 'manual';
+    }, [])
+
+    useEffect(() => {
         const autoPlayInterval = setInterval(() => {
             const nextStep = (activeStep + 1) % carouselProducts.length;
             setActiveStep(nextStep);

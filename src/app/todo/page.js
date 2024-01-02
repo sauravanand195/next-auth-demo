@@ -18,6 +18,7 @@ const Index = () => {
     }
 
     useEffect(() => {
+        window.history.scrollRestoration = 'manual';
         const loadData = async () => {
             const response = await fetch('/api/todo')
             const responseObj = await response.json()

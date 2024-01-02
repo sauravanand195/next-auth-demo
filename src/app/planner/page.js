@@ -23,6 +23,7 @@ const Index = () => {
     }
 
     useEffect(() => {
+        window.history.scrollRestoration = 'manual';
         if ("geolocation" in navigator) {
             navigator.geolocation.getCurrentPosition(({ coords }) => {
                 const { latitude, longitude } = coords
