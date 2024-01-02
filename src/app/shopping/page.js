@@ -1,5 +1,5 @@
 "use client"
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import {
     Container,
     Typography,
@@ -8,9 +8,7 @@ import {
     CardActionArea,
     CardContent,
     CardMedia,
-    Paper,
 } from '@mui/material';
-import SwipeableViews from 'react-swipeable-views';
 import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
@@ -72,10 +70,6 @@ const Index = () => {
         // Add more featured products as needed
     ];
 
-    const handleStepChange = (step) => {
-        setActiveStep(step);
-    };
-
     const handleProductClick = (product) => {
         setSelectedProduct(product);
         setOpenModal(true);
@@ -85,16 +79,16 @@ const Index = () => {
         setOpenModal(false);
     };
 
-    const autoPlayDelay = 3000; // Set the delay for auto-play in milliseconds
-
     useEffect(() => {
         const autoPlayInterval = setInterval(() => {
             const nextStep = (activeStep + 1) % carouselProducts.length;
             setActiveStep(nextStep);
-        }, autoPlayDelay);
+        }, 3000);
 
         return () => clearInterval(autoPlayInterval);
-    }, [activeStep, carouselProducts.length]);
+    }, [activeStep, carouselProducts]);
+
+    const currentProduct = carouselProducts[activeStep];
 
     return (
         <Container sx={{ padding: 4 }}>
@@ -102,31 +96,27 @@ const Index = () => {
             <Typography variant="h4" gutterBottom>
                 New Arrivals
             </Typography>
-            <SwipeableViews index={activeStep} onChangeIndex={handleStepChange} autoPlay interval={autoPlayDelay}>
-                {carouselProducts.map((product) => (
-                    <Card key={product.id} onClick={() => handleProductClick(product)}>
-                        <CardActionArea>
-                            <CardMedia
-                                component="img"
-                                alt={product.name}
-                                height="140"
-                                image={`${product.image}?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260`}
-                            />
-                            <CardContent>
-                                <Typography gutterBottom variant="h6" component="div">
-                                    {product.name}
-                                </Typography>
-                                <Typography variant="body2" color="text.secondary">
-                                    {product.description}
-                                </Typography>
-                                <Typography variant="h6" color="text.primary" sx={{ marginTop: 2 }}>
-                                    ₹{product.price.toFixed(2)}
-                                </Typography>
-                            </CardContent>
-                        </CardActionArea>
-                    </Card>
-                ))}
-            </SwipeableViews>
+            <Card onClick={() => handleProductClick(currentProduct)}>
+                <CardActionArea>
+                    <CardMedia
+                        component="img"
+                        alt={currentProduct.name}
+                        height="140"
+                        image={`${currentProduct.image}?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260`}
+                    />
+                    <CardContent>
+                        <Typography gutterBottom variant="h6" component="div">
+                            {currentProduct.name}
+                        </Typography>
+                        <Typography variant="body2" color="text.secondary">
+                            {currentProduct.description}
+                        </Typography>
+                        <Typography variant="h6" color="text.primary" sx={{ marginTop: 2 }}>
+                            ₹{currentProduct.price.toFixed(2)}
+                        </Typography>
+                    </CardContent>
+                </CardActionArea>
+            </Card>
 
             {/* Modal for Product Descriptions */}
             <Dialog open={openModal} onClose={handleModalClose} maxWidth="md" fullWidth>
