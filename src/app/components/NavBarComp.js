@@ -72,7 +72,7 @@ const NavBarComp = ({ session }) => {
                             onClick={() => setOpenDrawer(false)}
                             onKeyDown={() => setOpenDrawer(false)}
                         >
-                            <List sx={{ padding: "20px" }}>
+                            {session ? <List sx={{ padding: "20px" }}>
                                 <div style={{ display: 'flex', padding: "10px", justifyContent: "space-between" }}>
                                     <div style={{ textAlign: "left" }}>
                                         <Typography component="div" sx={{ fontSize: '20px', fontWeight: 'bolder' }}>
@@ -85,58 +85,75 @@ const NavBarComp = ({ session }) => {
                                     <Avatar sx={{ width: "60px", height: "60px", backgroundColor: "#1976d2", fontSize: "22px" }}>{getAbbr(session?.user?.username)}</Avatar>
                                 </div>
                                 <Divider sx={{ mt: 2, mb: 2 }} />
-                                {session && <>
-                                    <div onClick={() => setOpenProfile(true)} style={{ display: 'flex', padding: "10px 10px" }}>
-                                        <div style={{ border: "2px solid #1976d2", borderRadius: "50%", padding: "10px 0", width: '50px', height: "50px", display: "flex", justifyContent: "center", alignItems: "center" }}><SettingsOutlinedIcon color='primary' /></div>
-                                        <div style={{ display: "flex", paddingLeft: "20px", alignItems: "center" }}>
-                                            <Typography component="div" sx={{ fontSize: '20px', cursor: 'pointer' }}>
-                                                Manage Account
-                                            </Typography>
-                                        </div>
+
+                                <div onClick={() => setOpenProfile(true)} style={{ display: 'flex', padding: "10px 10px" }}>
+                                    <div style={{ border: "2px solid #1976d2", borderRadius: "50%", padding: "10px 0", width: '50px', height: "50px", display: "flex", justifyContent: "center", alignItems: "center" }}><SettingsOutlinedIcon color='primary' /></div>
+                                    <div style={{ display: "flex", paddingLeft: "20px", alignItems: "center" }}>
+                                        <Typography component="div" sx={{ fontSize: '20px', cursor: 'pointer' }}>
+                                            Manage Account
+                                        </Typography>
                                     </div>
-                                    <div style={{ display: 'flex', padding: "10px 10px" }}>
-                                        <div style={{ border: "2px solid #1976d2", borderRadius: "50%", padding: "10px 0", width: '50px', height: "50px", display: "flex", justifyContent: "center", alignItems: "center" }}><GTranslateOutlinedIcon color='primary' /></div>
-                                        <div style={{ display: "flex", paddingLeft: "20px", alignItems: "center" }}>
-                                            <Typography component="div" sx={{ fontSize: '20px', cursor: 'pointer' }}>
-                                                Language
-                                            </Typography>
-                                        </div>
+                                </div>
+                                <div style={{ display: 'flex', padding: "10px 10px" }}>
+                                    <div style={{ border: "2px solid #1976d2", borderRadius: "50%", padding: "10px 0", width: '50px', height: "50px", display: "flex", justifyContent: "center", alignItems: "center" }}><GTranslateOutlinedIcon color='primary' /></div>
+                                    <div style={{ display: "flex", paddingLeft: "20px", alignItems: "center" }}>
+                                        <Typography component="div" sx={{ fontSize: '20px', cursor: 'pointer' }}>
+                                            Language
+                                        </Typography>
                                     </div>
-                                    <div style={{ display: 'flex', padding: "10px 10px" }}>
-                                        <div style={{ border: "2px solid #1976d2", borderRadius: "50%", padding: "10px 0", width: '50px', height: "50px", display: "flex", justifyContent: "center", alignItems: "center" }}><NotificationsActiveOutlinedIcon color='primary' /></div>
-                                        <div style={{ display: "flex", paddingLeft: "20px", alignItems: "center" }}>
-                                            <Typography component="div" sx={{ fontSize: '20px', cursor: 'pointer' }}>
-                                                Notifications
-                                            </Typography>
-                                        </div>
+                                </div>
+                                <div style={{ display: 'flex', padding: "10px 10px" }}>
+                                    <div style={{ border: "2px solid #1976d2", borderRadius: "50%", padding: "10px 0", width: '50px', height: "50px", display: "flex", justifyContent: "center", alignItems: "center" }}><NotificationsActiveOutlinedIcon color='primary' /></div>
+                                    <div style={{ display: "flex", paddingLeft: "20px", alignItems: "center" }}>
+                                        <Typography component="div" sx={{ fontSize: '20px', cursor: 'pointer' }}>
+                                            Notifications
+                                        </Typography>
                                     </div>
-                                    <Divider sx={{ mt: 2, mb: 2 }} />
-                                    <div style={{ display: 'flex', padding: "10px 10px" }}>
-                                        <div style={{ border: "2px solid #1976d2", borderRadius: "50%", padding: "10px 0", width: '50px', height: "50px", display: "flex", justifyContent: "center", alignItems: "center" }}><PolicyOutlinedIcon color='primary' /></div>
-                                        <div style={{ display: "flex", paddingLeft: "20px", alignItems: "center" }}>
-                                            <Typography component="div" sx={{ fontSize: '20px', cursor: 'pointer' }}>
-                                                Policy
-                                            </Typography>
-                                        </div>
+                                </div>
+                                <Divider sx={{ mt: 2, mb: 2 }} />
+                                <div style={{ display: 'flex', padding: "10px 10px" }}>
+                                    <div style={{ border: "2px solid #1976d2", borderRadius: "50%", padding: "10px 0", width: '50px', height: "50px", display: "flex", justifyContent: "center", alignItems: "center" }}><PolicyOutlinedIcon color='primary' /></div>
+                                    <div style={{ display: "flex", paddingLeft: "20px", alignItems: "center" }}>
+                                        <Typography component="div" sx={{ fontSize: '20px', cursor: 'pointer' }}>
+                                            Policy
+                                        </Typography>
                                     </div>
-                                    <div style={{ display: 'flex', padding: "10px 10px" }}>
-                                        <div style={{ border: "2px solid #1976d2", borderRadius: "50%", padding: "10px 0", width: '50px', height: "50px", display: "flex", justifyContent: "center", alignItems: "center" }}><FeedbackOutlinedIcon color='primary' /></div>
-                                        <div style={{ display: "flex", paddingLeft: "20px", alignItems: "center" }}>
-                                            <Typography component="div" sx={{ fontSize: '20px', cursor: 'pointer' }}>
-                                                Feedback
-                                            </Typography>
-                                        </div>
+                                </div>
+                                <div style={{ display: 'flex', padding: "10px 10px" }}>
+                                    <div style={{ border: "2px solid #1976d2", borderRadius: "50%", padding: "10px 0", width: '50px', height: "50px", display: "flex", justifyContent: "center", alignItems: "center" }}><FeedbackOutlinedIcon color='primary' /></div>
+                                    <div style={{ display: "flex", paddingLeft: "20px", alignItems: "center" }}>
+                                        <Typography component="div" sx={{ fontSize: '20px', cursor: 'pointer' }}>
+                                            Feedback
+                                        </Typography>
                                     </div>
-                                    <div style={{ display: 'flex', padding: "10px 10px" }}>
-                                        <div style={{ border: "2px solid #1976d2", borderRadius: "50%", padding: "10px 0", width: '50px', height: "50px", display: "flex", justifyContent: "center", alignItems: "center" }}><LogoutOutlinedIcon color='primary' /></div>
-                                        <div style={{ display: "flex", paddingLeft: "20px", alignItems: "center" }}>
-                                            <Link href="/auth/signout" sx={{ color: 'inherit', textDecoration: "none" }}>
-                                                <Typography textAlign="center" sx={{ fontSize: '20px' }} >Sign out</Typography>
-                                            </Link>
-                                        </div>
+                                </div>
+                                <div style={{ display: 'flex', padding: "10px 10px" }}>
+                                    <div style={{ border: "2px solid #1976d2", borderRadius: "50%", padding: "10px 0", width: '50px', height: "50px", display: "flex", justifyContent: "center", alignItems: "center" }}><LogoutOutlinedIcon color='primary' /></div>
+                                    <div style={{ display: "flex", paddingLeft: "20px", alignItems: "center" }}>
+                                        <Link href="/auth/signout" sx={{ color: 'inherit', textDecoration: "none" }}>
+                                            <Typography textAlign="center" sx={{ fontSize: '20px' }} >Sign out</Typography>
+                                        </Link>
                                     </div>
-                                </>}
+                                </div>
                             </List>
+                                : <List sx={{ padding: "20px" }}>
+                                    <div style={{ display: 'flex', padding: "10px", justifyContent: "space-between" }}>
+                                        <div style={{ textAlign: "left" }}>
+                                            <Typography component="div" sx={{ fontSize: '20px', fontWeight: 'bolder' }}>
+                                                {session ? session?.user?.username : 'N/A'}
+                                            </Typography>
+                                            <Typography component="div" sx={{ fontSize: '20px' }}>
+                                                {session ? session?.user?.email : 'N/A'}
+                                            </Typography>
+                                        </div>
+                                        <Avatar sx={{ width: "60px", height: "60px", backgroundColor: "#1976d2", fontSize: "22px" }}>{getAbbr('N A')}</Avatar>
+                                    </div>
+                                    <div style={{ marginTop: '10px' }}>
+                                        <Button variant="contained" color="primary" sx={{ width: "100%" }} onClick={() => { router.push('/auth/signin') }}>
+                                            Sign In / Sign Up
+                                        </Button>
+                                    </div>
+                                </List>}
                         </Box>
                     </Drawer>
                     {openProfile && <ProfilePopup open={openProfile} handleClose={() => setOpenProfile(false)} session={session} />}
