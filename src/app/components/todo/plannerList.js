@@ -59,13 +59,13 @@ const PlannerList = ({ todoData, fetchData }) => {
     }
 
     return (
-        <Container maxWidth="lg" sx={{ padding: "10px 10px" }}>
+        <Container maxWidth="lg">
             {openPopup && <TaskPopup open={openPopup} setOpen={setOpenPopup} fetchData={fetchData} selectedTask={selectedTask} action="update" />}
             <List sx={{ width: '100%', bgcolor: 'background.paper' }}>
                 {todoData?.map((val, ind) => (
                     <ListItem alignItems="flex-start" sx={{ pb: 2 }}
                         secondaryAction={
-                            <div style={{ marginTop: "-40px", marginRight: "-30px" }}>
+                            <div style={{ position: "relative", right: "-16px", top: "50%", transform: "translateY(-50%)" }}>
                                 <IconButton disabled={val.status == 'complete'} onClick={() => editTask(val)}><EditIcon /></IconButton>
                                 <IconButton disabled={val.status == 'complete'} onClick={() => { deleteTask(val.id) }}><DeleteIcon /></IconButton>
                                 <Tooltip placement='top-start' title={`${val.status == 'complete' ? 'Mark In-complete' : 'Mark Complete'}`} leaveDelay={200}>
