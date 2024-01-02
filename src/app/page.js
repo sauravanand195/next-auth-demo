@@ -17,6 +17,7 @@ import {
     Snackbar,
 } from '@mui/material';
 import { useRouter } from 'next/navigation';
+import Footer from './components/Footer';
 
 const products = [
     {
@@ -336,7 +337,7 @@ function App() {
                 </Container>
             </div>
 
-            <Container maxWidth="sm" sx={{pb: 4}}>
+            <Container maxWidth="sm" sx={{ pb: 4 }}>
                 <Paper elevation={3} sx={{ padding: 3, marginTop: 4 }}>
                     <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                         <Typography component="h1" variant="h5" sx={{ marginBottom: 2 }}>
@@ -401,6 +402,7 @@ function App() {
                     anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
                 />
             </Container>
+            <Footer />
         </div >
     );
 }
