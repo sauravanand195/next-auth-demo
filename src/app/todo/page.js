@@ -28,7 +28,7 @@ const Index = () => {
     }, [])
 
     return (
-        <div style={{ backgroundColor: "#FFFCF9" }}>
+        <div style={{ backgroundColor: "#FFFCF9", paddingBottom: "20px" }}>
             <TaskPopup open={open} setOpen={setOpen} fetchData={fetchData} action="create" />
             <CssBaseline />
             <main style={{ minHeight: '78vh' }}>

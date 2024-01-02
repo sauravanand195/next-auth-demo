@@ -8,7 +8,7 @@ import FacebookIcon from '@mui/icons-material/Facebook';
 const Footer = async () => {
     return (
         <>
-            <Paper elevation={3} style={{ padding: '20px', position: "relative", top: 'auto', bottom: -30 }}>
+            <Paper elevation={3} style={{ padding: '20px', position: "relative", left: 0, bottom: -50, width: "100%" }}>
                 <div style={{ display: 'flex', justifyContent: 'center' }}>
                     <IconButton color="primary" href="#" target="_blank">
                         <GitHubIcon />

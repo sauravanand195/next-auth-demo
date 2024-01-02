@@ -48,12 +48,12 @@ const products = [
 const testimonials = [
     {
         id: 1,
-        name: 'John Doe',
+        name: 'Premashish Anand',
         quote: 'Amazing products! The quality is unmatched, and the customer service is exceptional.',
     },
     {
         id: 2,
-        name: 'Jane Smith',
+        name: 'Priyanka Satija',
         quote: 'I love the variety of products. Each one feels unique and well-crafted.',
     },
     // Add more testimonials as needed
@@ -336,7 +336,7 @@ function App() {
                 </Container>
             </div>
 
-            <Container maxWidth="sm">
+            <Container maxWidth="sm" sx={{pb: 4}}>
                 <Paper elevation={3} sx={{ padding: 3, marginTop: 4 }}>
                     <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                         <Typography component="h1" variant="h5" sx={{ marginBottom: 2 }}>
