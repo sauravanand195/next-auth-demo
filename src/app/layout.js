@@ -8,8 +8,13 @@ import React from 'react'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
-  title: 'Next Auth',
-  description: 'Nextjs with Prisma and next-auth',
+  title: 'Organize your work and life',
+  description: 'Maintain your day-to-day tasks',
+  icons: {
+    icon: {
+      url: "/link_icon.png",
+    },
+  },
 }
 
 export default function RootLayout({ children }) {
