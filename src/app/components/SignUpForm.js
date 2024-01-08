@@ -8,24 +8,66 @@ import { useRouter } from 'next/navigation';
 
 const SignUpForm = () => {
     const router = useRouter()
-    const [firstName, setFirstName] = useState('')
-    const [lastName, setLastName] = useState('')
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
+    const [inputData, setInputData] = useState({
+        firstName: "",
+        lastName: "",
+        email: "",
+        password: ""
+    })
+    const [errors, setErrors] = useState({})
     const [message, setMessage] = useState('')
-    const [snack, setSnack] = useState("")
+    const [snack, setSnack] = useState({ msg: "", type: "error" })
+
+    const validateInput = (inputData) => {
+        console.log('inputData', inputData);
+        let error = {}
+        const regName = /^[a-zA-Z.]+([\s][a-zA-Z.]+)*$/;
+        const regEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const regPass = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
+
+        if (!regName.test(inputData.firstName)) error.firstName = true
+        if (!regName.test(inputData.lastName)) error.lastName = true
+        if (!regEmail.test(inputData.email)) error.email = true
+        if (!regPass.test(inputData.password)) error.password = true
+
+        setErrors(error)
+        console.log('error', error);
+        return Object.keys(error).length //== 0
+    }
+
+    const handleFieldChange = (e) => {
+        setInputData({
+            ...inputData,
+            [e.target.name]: e.target.value
+        })
+    }
 
     const handleSubmit = async () => {
         setMessage('Signing up ...')
-        const res = await signUp(firstName, lastName, email, password)
-        setSnack(res)
-        setTimeout(() => {
-            router.push('/auth/signin')
-        }, 1000);
+        if (inputData.firstName == '' && inputData.lastName == '' && inputData.email == '' && inputData.password == '') {
+            setSnack({ msg: "Please fill in all the details", type: "error" })
+            setMessage('')
+        } else {
+            if (!validateInput(inputData)) {
+                const res = await signUp(inputData?.firstName, inputData?.lastName, inputData?.email, inputData?.password)
+                if (res.error) {
+                    setSnack({ msg: res.msg, type: "error" });
+                    setMessage('')
+                } else {
+                    setSnack({ msg: res.msg, type: "success" })
+                    setTimeout(() => {
+                        router.push('/auth/signin')
+                    }, 2000);
+                }
+            } else {
+                setSnack({ msg: "Please fill in correct details", type: "error" })
+                setMessage('')
+            }
+        }
     }
 
     return (
-        <Container component="main" maxWidth="xs">
+        <Container component="main" maxWidth="xs" >
             <CssBaseline />
             <Box sx={{ marginTop: 8, display: 'flex', flexDirection: 'column', alignItems: 'center', }}>
                 <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
@@ -42,7 +84,9 @@ const SignUpForm = () => {
                                 label="First Name"
                                 name="firstName"
                                 autoComplete="given-name"
-                                onChange={(e) => setFirstName(e.target.value)}
+                                onChange={(e) => handleFieldChange(e)}
+                                error={errors.firstName}
+                                helperText={errors.firstName ? `Please enter valid first name` : ''}
                             />
                         </Grid>
                         <Grid item xs={12} sm={6}>
@@ -51,7 +95,9 @@ const SignUpForm = () => {
                                 label="Last Name"
                                 name="lastName"
                                 autoComplete="family-name"
-                                onChange={(e) => setLastName(e.target.value)}
+                                onChange={(e) => handleFieldChange(e)}
+                                error={errors.lastName}
+                                helperText={errors.lastName ? `Please enter valid last name` : ''}
                             />
                         </Grid>
                         <Grid item xs={12}>
@@ -61,17 +107,21 @@ const SignUpForm = () => {
                                 name="email"
                                 type="text"
                                 autoComplete="email"
-                                onChange={(e) => setEmail(e.target.value)}
+                                onChange={(e) => handleFieldChange(e)}
+                                error={errors.email}
+                                helperText={errors.email ? `Please enter valid email` : ''}
                             />
                         </Grid>
                         <Grid item xs={12}>
                             <TextField required fullWidth
-                                name="password"
-                                label="Password"
-                                type="password"
                                 id="password"
+                                label="Password"
+                                name="password"
+                                type="password"
                                 autoComplete="new-password"
-                                onChange={(e) => setPassword(e.target.value)}
+                                onChange={(e) => handleFieldChange(e)}
+                                error={errors.password}
+                                helperText={errors.password ? `Please enter valid password` : ''}
                             />
                         </Grid>
                     </Grid>
@@ -86,9 +136,9 @@ const SignUpForm = () => {
                         </Grid>
                     </Grid>
                 </Box>
-                {snack && <AlertComp severity="success" text={snack} />}
+                {snack.msg && <AlertComp severity={snack?.type} text={snack.msg} />}
             </Box>
-        </Container>
+        </Container >
     )
 }
 

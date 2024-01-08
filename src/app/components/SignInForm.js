@@ -29,6 +29,7 @@ const SignInForm = () => {
             })
             console.log('signInResponse >>>> ', signInResponse);
             if (!signInResponse || signInResponse.ok !== true) {
+                console.log('Invalid Credentials');
                 setSnack(true)
             } else {
                 router.refresh()

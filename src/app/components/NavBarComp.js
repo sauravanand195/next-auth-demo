@@ -28,13 +28,16 @@ const NavBarComp = ({ session }) => {
                 <Container maxWidth="xl">
                     <Toolbar disableGutters>
                         {/* <Typography variant="h6" noWrap component="a" sx={{ mr: 2, display: { xs: 'none', md: 'flex' }, fontSize: '1rem', fontFamily: 'monospace', fontWeight: 700, letterSpacing: '.1rem', color: 'black', textDecoration: 'none', }}> */}
-                        <Typography variant="h6" noWrap component="a" sx={{ cursor: "pointer", mr: 2, display: { xs: 'none', md: 'flex' }, fontSize: "20px", fontWeight: "bold", fontFamily: "Arial,Helvetica, sans-serif", letterSpacing: '.1rem', background: "linear-gradient(to right, #f32170, #ff6b08,#cf23cf, #eedd44)", WebkitTextFillColor: "transparent", WebkitBackgroundClip: "text" }}
+                        <Typography variant="h6" noWrap component="a" sx={{ cursor: "pointer", mr: 2, display: { xs: 'none', md: 'flex' }, fontSize: "20px", fontWeight: "bold", fontFamily: "Arial,Helvetica, sans-serif", letterSpacing: '0rem' }}
                             onClick={() => { router.push('/') }}>
-                            saurav.tech
+                            <span style={{ color: "#dc5656" }}>Saurav</span>
+                            <span style={{ color: "#1976d2" }}>Tech</span>
                         </Typography>
-                        <Typography sx={{ cursor: "pointer", display: { xs: 'flex', md: 'none' }, flexGrow: 1, fontSize: "20px", fontWeight: "bold", fontFamily: "Arial,Helvetica, sans-serif", letterSpacing: '.1rem', background: "linear-gradient(to right, #f32170, #ff6b08,#cf23cf, #eedd44)", WebkitTextFillColor: "transparent", WebkitBackgroundClip: "text" }}
+                        <Typography sx={{ cursor: "pointer", display: { xs: 'flex', md: 'none' }, flexGrow: 1, fontSize: "20px", fontWeight: "bold", fontFamily: "Arial,Helvetica, sans-serif", letterSpacing: '0rem' }}
                             onClick={() => { router.push('/') }}>
-                            saurav.tech
+                            {/* style={{ background: "linear-gradient(to right, #f32170, #ff6b08,#cf23cf, #eedd44)", WebkitTextFillColor: "transparent", WebkitBackgroundClip: "text" }} */}
+                            <span style={{ color: "#dc5656" }}>Saurav</span>
+                            <span style={{ color: "#1976d2" }}>Tech</span>
                         </Typography>
                         <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                             {pathname == '/' && <>
@@ -62,7 +65,7 @@ const NavBarComp = ({ session }) => {
                         </Box>
                     </Toolbar>
                     <Drawer
-                        variant='temperory'
+                        variant='temporary'
                         anchor='right'
                         open={openDrawer}
                         onClose={() => setOpenDrawer(false)}
