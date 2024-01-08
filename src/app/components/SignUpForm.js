@@ -50,6 +50,7 @@ const SignUpForm = () => {
         } else {
             if (!validateInput(inputData)) {
                 const res = await signUp(inputData?.firstName, inputData?.lastName, inputData?.email, inputData?.password)
+                console.log('sign-up response >> ', res);
                 if (res.error) {
                     setSnack({ msg: res.msg, type: "error" });
                     setMessage('')

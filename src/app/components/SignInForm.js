@@ -3,20 +3,20 @@ import React, { useEffect, useState } from 'react'
 import { signIn } from 'next-auth/react'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
-import { Avatar, Button, CssBaseline, TextField, FormControlLabel, Checkbox, Link, Grid, Box, Typography, Container } from '@mui/material';
+import { Avatar, Button, CssBaseline, TextField, FormControlLabel, Checkbox, Link, Grid, Box, Typography, Container, FormControl, InputLabel, OutlinedInput, InputAdornment, IconButton } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import AlertComp from './AlertComp'
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
 const SignInForm = () => {
     const { status } = useSession()
     const router = useRouter()
-
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [message, setMessage] = useState('')
-    const [snack, setSnack] = useState(false)
-
+    const [snack, setSnack] = useState({ msg: "", type: "error" })
     const defaultTheme = createTheme();
 
     const handleSubmit = async () => {
@@ -27,17 +27,16 @@ const SignInForm = () => {
                 password,
                 redirect: false,
             })
-            console.log('signInResponse >>>> ', signInResponse);
+            console.log('sign-in response >> ', signInResponse);
             if (!signInResponse || signInResponse.ok !== true) {
-                console.log('Invalid Credentials');
-                setSnack(true)
+                setSnack({ msg: "Invalid Credentials", type: "error" })
             } else {
                 router.refresh()
             }
         } catch (err) {
             console.log('Error', err);
         }
-        setMessage(message)
+        setMessage('')
     }
 
     useEffect(() => {
@@ -47,6 +46,16 @@ const SignInForm = () => {
         }
     }, [status])
 
+    const [showPassword, setShowPassword] = React.useState(false);
+
+    const handleClickShowPassword = () => {
+        console.log('clicked');
+        setShowPassword(!showPassword);
+    }
+
+    const handleMouseDownPassword = (event) => {
+        event.preventDefault();
+    };
 
     return (
         <ThemeProvider theme={defaultTheme}>
@@ -70,10 +79,23 @@ const SignInForm = () => {
                         <TextField margin="normal" required fullWidth
                             name="password"
                             label="Password"
-                            type="password"
                             id="password"
+                            type={showPassword ? 'text' : 'password'}
                             autoComplete="current-password"
                             onChange={(e) => setPassword(e.target.value)}
+                            InputProps={{
+                                endAdornment:
+                                    <InputAdornment position="end">
+                                        <IconButton
+                                            aria-label="toggle password visibility"
+                                            onClick={handleClickShowPassword}
+                                            onMouseDown={handleMouseDownPassword}
+                                            edge="end"
+                                        >
+                                            {showPassword ? <VisibilityOff /> : <Visibility />}
+                                        </IconButton>
+                                    </InputAdornment>
+                            }}
                         />
                         <FormControlLabel
                             control={<Checkbox value="remember" color="primary" />}
@@ -95,7 +117,7 @@ const SignInForm = () => {
                         </Grid>
                     </Box>
                 </Box>
-                {snack && <AlertComp severity='error' text='Invalid Credentials' />}
+                {snack.msg && <AlertComp severity={snack?.type} text={snack.msg} />}
             </Container>
         </ThemeProvider>
     )
