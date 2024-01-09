@@ -156,13 +156,14 @@ const Index = () => {
             <Grid container spacing={3}>
                 {featuredProducts.map((product) => (
                     <Grid item key={product.id} xs={12} sm={6} md={4}>
-                        <Card onClick={() => handleProductClick(product)}>
+                        <Card>
                             <CardActionArea>
                                 <CardMedia
                                     component="img"
                                     alt={product.name}
                                     height="140"
                                     image={`${product.image}?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260`}
+                                    onClick={() => handleProductClick(product)}
                                 />
                                 <CardContent>
                                     <Typography gutterBottom variant="h6" component="div">
@@ -171,9 +172,15 @@ const Index = () => {
                                     <Typography variant="body2" color="text.secondary">
                                         {product.description}
                                     </Typography>
-                                    <Typography variant="h6" color="text.primary" sx={{ marginTop: 2 }}>
-                                        ₹{product.price.toFixed(2)}
-                                    </Typography>
+                                    <div style={{ display: "flex", justifyContent: "space-between", marginTop: "20px" }}>
+                                        <Typography variant="h6" color="text.primary" sx={{ display: "flex", alignItems: "center" }}>
+                                            ₹{product.price.toFixed(2)}
+                                        </Typography>
+                                        <Typography variant="h6" color="text.primary"
+                                            sx={{ cursor: "pointer", padding: "6px 16px", borderRadius: "4px", backgroundColor: "#1976d2", color: "white", fontSize: "0.875rem", fontWeight: 500, boxShadow: "0px 3px 1px -2px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 1px 5px 0px rgba(0,0,0,0.12)", display: 'flex', alignItems: 'center', textTransform: 'uppercase' }}
+                                        >Add to Cart
+                                        </Typography>
+                                    </div>
                                 </CardContent>
                             </CardActionArea>
                         </Card>

@@ -1,25 +1,19 @@
 "use client"
-import { Avatar, Box, Button, Card, CardActions, CardContent, CardHeader, Checkbox, Container, FormControlLabel, FormGroup, Grid, IconButton, List, ListItem, ListItemAvatar, ListItemText, Paper, Stack, Step, StepContent, StepIcon, StepLabel, Stepper, TextField, Tooltip, Typography } from "@mui/material";
+import { Avatar, Box, Checkbox, Container, IconButton, List, ListItem, ListItemAvatar, ListItemText, Tooltip, Typography } from "@mui/material";
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
-import LabelOutlinedIcon from '@mui/icons-material/LabelOutlined';
-import LabelIcon from '@mui/icons-material/Label';
-import SearchIcon from '@mui/icons-material/Search';
-import BookmarksIcon from '@mui/icons-material/Bookmarks';
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import TaskPopup from "./taskPopup";
-import { CustomToolTip, stringAvatar } from "../../../../public/js/commonFun";
+import { stringAvatar } from "../../../../public/js/commonFun";
 import Chip from '@mui/material/Chip';
-import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
-import Favorite from '@mui/icons-material/Favorite';
 import AssignmentTurnedInOutlinedIcon from '@mui/icons-material/AssignmentTurnedInOutlined';
 import AssignmentTurnedInSharpIcon from '@mui/icons-material/AssignmentTurnedInSharp';
 
 const PlannerList = ({ todoData, fetchData }) => {
     const [openPopup, setOpenPopup] = useState(false)
     const [selectedTask, setSelectedTask] = useState({})
-    const [activeStep, setActiveStep] = useState(0)
+    const todayRef = useRef(null);
 
     const updatestatus = async (val) => {
         try {
@@ -32,6 +26,13 @@ const PlannerList = ({ todoData, fetchData }) => {
             console.log('Error :>> ', err);
         }
     }
+
+    useEffect(() => {
+        // Scroll into view when the component mounts
+        if (todayRef.current) {
+            todayRef.current.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        }
+    }, []);
 
     const getPCode = (val) => {
         switch (val) {
@@ -58,14 +59,50 @@ const PlannerList = ({ todoData, fetchData }) => {
         setSelectedTask(val)
     }
 
+    const getMonthDates = () => {
+        const today = new Date();
+        const startOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
+
+        const monthDates = [];
+        for (let i = 0; i < 30; i++) {
+            const date = new Date(startOfMonth);
+            date.setDate(startOfMonth.getDate() + i);
+            monthDates.push(date);
+        }
+
+        return monthDates;
+    };
+
     return (
         <Container maxWidth="lg">
             {openPopup && <TaskPopup open={openPopup} setOpen={setOpenPopup} fetchData={fetchData} selectedTask={selectedTask} action="update" />}
+            {/* Horizontal Scrollable Monthly Calendar */}
+            <div style={{ overflowX: 'auto', whiteSpace: 'nowrap', marginBottom: '16px' }}>
+                {getMonthDates().map((date, index) => (
+                    <div
+                        key={index}
+                        ref={date.toDateString() === new Date().toDateString() ? todayRef : null}
+                        style={{
+                            display: 'inline-block',
+                            minWidth: '120px',
+                            padding: '8px',
+                            border: '1px solid #ddd',
+                            borderRadius: '8px',
+                            marginRight: '8px',
+                            backgroundColor: date.toDateString() === new Date().toDateString() ? '#87CEEB' : 'transparent',
+                            transition: 'background-color 0.3s ease-in-out',
+                        }}
+                    >
+                        <Typography variant="subtitle2" sx={{ fontWeight: 'bold' }}>{date.toLocaleDateString('en-US', { weekday: 'short' })}</Typography>
+                        <Typography>{date.toLocaleDateString('en-US', { day: 'numeric' })}</Typography>
+                    </div>
+                ))}
+            </div>
             <List sx={{ width: '100%', bgcolor: 'background.paper' }}>
                 {todoData?.map((val, ind) => (
-                    <ListItem alignItems="flex-start" sx={{ pb: 2 }}
+                    <ListItem key={ind} alignItems="flex-start" sx={{ pb: 2 }}
                         secondaryAction={
-                            <div style={{ position: "relative", right: "-16px", top: "50%", transform: "translateY(-50%)" }}>
+                            <Box style={{ position: "relative", right: "-16px", top: "50%", transform: "translateY(-50%)" }}>
                                 <IconButton disabled={val.status == 'complete'} onClick={() => editTask(val)}><EditIcon /></IconButton>
                                 <IconButton disabled={val.status == 'complete'} onClick={() => { deleteTask(val.id) }}><DeleteIcon /></IconButton>
                                 <Tooltip placement='top-start' title={`${val.status == 'complete' ? 'Mark In-complete' : 'Mark Complete'}`} leaveDelay={200}>
@@ -76,7 +113,7 @@ const PlannerList = ({ todoData, fetchData }) => {
                                         checkedIcon={<AssignmentTurnedInSharpIcon />}
                                     />
                                 </Tooltip>
-                            </div>
+                            </Box>
                         }
                         disablePadding
                     >
@@ -85,16 +122,15 @@ const PlannerList = ({ todoData, fetchData }) => {
                         </ListItemAvatar>
                         <ListItemText
                             primary={<Typography sx={{ fontWeight: "bold", textDecoration: (val.status == 'complete') ? 'line-through' : '' }}>{val.task}</Typography>}
-                            secondary={<>
-                                <Typography sx={{ fontWeight: "normal", mb: 1 }}>{val.description}</Typography>
-                                <Chip label={val.priority} size="small" color={getPCode(val.priority)} />
-                            </>}
+                            secondary={<span style={{ display: "flex", flexDirection: "column" }}>
+                                <Typography component="span" sx={{ fontWeight: "normal", mb: 1 }}>{val.description}</Typography>
+                                <Chip component="span" label={val.priority} size="small" color={getPCode(val.priority)} sx={{ width: "80px" }} />
+                            </span>}
                         />
                         <div className="line"></div>
                     </ListItem>
                 ))}
             </List >
-
             <style jsx>{`
                 .line {top: 49px;left: 19px;height: 66px;position: absolute;border-left: 3px solid gray;}
             `}</style>
