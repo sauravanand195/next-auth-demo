@@ -27,6 +27,7 @@ const products = [
         content: 'Maintain your day-to-day tasks or list everything that you have to do, with the most important tasks at the top of the list, and the least important tasks at the bottom.',
         action: 'Start Organising',
         route: '/todo',
+        pic: 'https://cdn.pixabay.com/photo/2021/03/28/13/02/lists-6131220_640.jpg'
     },
     {
         id: 2,
@@ -35,14 +36,16 @@ const products = [
         content: 'Enjoy unlimited Free Shipping, early access to Lightning Deals and more. Explore deals on top categories like Electronics, Fashion & more online today! Best Deals. Low Prices. No Cost EMI Available.',
         action: 'Start Shopping',
         route: '/shopping',
+        pic: 'https://cdn.pixabay.com/photo/2019/04/26/07/14/store-4156934_640.png'
     },
     {
-        id: 1,
+        id: 3,
         name: 'Planner App',
         description: 'Organize your work and life, finally.',
         content: 'Maintain your day-to-day tasks or list everything that you have to do, with the most important tasks at the top of the list, and the least important tasks at the bottom.',
         action: 'Start Planning',
         route: '/planner',
+        pic: 'https://cdn.pixabay.com/photo/2015/10/21/10/27/calendar-999172_640.jpg'
     },
 ];
 
@@ -79,11 +82,11 @@ const productBenefits = [
     // Add more benefits as needed
 ];
 
-function getRandomImage() {
-    const width = 400; // Specify the desired width of the image
-    const height = 200; // Specify the desired height of the image
-    return `https://picsum.photos/${width}/${height}?random=${Math.floor(Math.random() * 1000)}`;
-}
+// function getRandomImage() {
+//     const width = 400; // Specify the desired width of the image
+//     const height = 200; // Specify the desired height of the image
+//     return `https://picsum.photos/${width}/${height}?random=${Math.floor(Math.random() * 100)}`;
+// }
 
 const Landing = ({ session }) => {
     console.log('session', session);
@@ -92,32 +95,23 @@ const Landing = ({ session }) => {
     const parallaxRef2 = useRef(null);
     const [cardImages, setCardImages] = useState([]);
 
-    useEffect(() => {
-        // Fetch random card images from Lorem Picsum
-        const fetchCardImages = async () => {
-            const imagePromises = Array.from({ length: products.length }, () =>
-                axios.get(getRandomImage())
-            );
+    // useEffect(() => {
+    //     // Fetch random card images from Lorem Picsum
+    //     const fetchCardImages = async () => {
+    //         const imagePromises = Array.from({ length: products.length }, () =>
+    //             axios.get(getRandomImage())
+    //         );
 
-            try {
-                const imageResponses = await Promise.all(imagePromises);
-                const imageUrls = imageResponses.map((response) => response.config.url);
-                setCardImages(imageUrls);
-            } catch (error) {
-                console.error('Error fetching card images:', error);
-            }
-        };
-
-        // Play the video when the component mounts
-        // const videoElement = document.getElementById('videoElement');
-        // if (videoElement) {
-        //     videoElement.play().catch((error) => {
-        //         console.error('Error playing video:', error);
-        //     });
-        // }
-
-        fetchCardImages();
-    }, []);
+    //         try {
+    //             const imageResponses = await Promise.all(imagePromises);
+    //             const imageUrls = imageResponses.map((response) => response.config.url);
+    //             setCardImages(imageUrls);
+    //         } catch (error) {
+    //             console.error('Error fetching card images:', error);
+    //         }
+    //     };
+    //     fetchCardImages();
+    // }, []);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -264,8 +258,8 @@ const Landing = ({ session }) => {
                                 }}
                             >
                                 <img
-                                    src={cardImages[index] || getRandomImage()}
-                                    alt={`Product ${product.id}`}
+                                    src={product.pic}
+                                    alt={'Image failed to load'}
                                     style={{ width: '100%', height: '200px', objectFit: 'cover' }}
                                 />
                                 <CardContent style={{ flex: 1, display: 'flex', flexDirection: 'column', paddingBottom: "20px" }}>

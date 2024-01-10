@@ -11,7 +11,7 @@ import { FormControl, FormControlLabel, FormLabel, Radio, RadioGroup } from '@mu
 import axios from 'axios';
 
 const TaskPopup = ({ open, setOpen, fetchData, action, selectedTask }) => {
-    const [inputData, setInputData] = useState({ task: selectedTask ? selectedTask.task : "", description: selectedTask ? selectedTask.description : "", priority: selectedTask ? selectedTask.priority : "", status: "" })
+    const [inputData, setInputData] = useState({ task: selectedTask ? selectedTask.task : "", description: selectedTask ? selectedTask.description : "", priority: selectedTask ? selectedTask.priority : "", status: "", taskTime: new Date() })
 
     const handleClose = () => {
         setOpen(false);

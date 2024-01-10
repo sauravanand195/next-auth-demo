@@ -9,7 +9,7 @@ export async function GET(NextRequest) {
 
     if (!session) { return 'Please sign in to proceed' }
 
-    const users = await prisma.todo.findMany({
+    const users = await prisma.todos.findMany({
         where: {
             authorId: session?.user?.id
         },
@@ -23,9 +23,10 @@ export async function GET(NextRequest) {
 
 export async function POST(NextRequest) {
     const json = await NextRequest.json();
+    console.log('json', json);
     const session = await getServerSession(authOptions)
     try {
-        const todo = await prisma.todo.create({
+        const todo = await prisma.todos.create({
             data: {
                 ...json,
                 authorId: session?.user?.id,
@@ -48,7 +49,7 @@ export async function POST(NextRequest) {
 export async function PUT(NextRequest) {
     const json = await NextRequest.json();
     try {
-        const todo = await prisma.todo.update({
+        const todo = await prisma.todos.update({
             where: { id: json.id, },
             data: { ...json },
         });
@@ -69,7 +70,7 @@ export async function PUT(NextRequest) {
 export async function DELETE(NextRequest) {
     const json = await NextRequest.json();
     try {
-        const deleteUser = await prisma.todo.delete({
+        const deleteUser = await prisma.todos.delete({
             where: { id: json.id, },
         })
         return NextResponse.json({
