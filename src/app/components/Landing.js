@@ -27,7 +27,7 @@ const products = [
         content: 'Maintain your day-to-day tasks or list everything that you have to do, with the most important tasks at the top of the list, and the least important tasks at the bottom.',
         action: 'Start Organising',
         route: '/todo',
-        pic: 'https://cdn.pixabay.com/photo/2021/03/28/13/02/lists-6131220_640.jpg'
+        pic: 'https://images.pexels.com/photos/295826/pexels-photo-295826.jpeg?auto=compress&cs=tinysrgb&w=600'
     },
     {
         id: 2,
@@ -36,7 +36,7 @@ const products = [
         content: 'Enjoy unlimited Free Shipping, early access to Lightning Deals and more. Explore deals on top categories like Electronics, Fashion & more online today! Best Deals. Low Prices. No Cost EMI Available.',
         action: 'Start Shopping',
         route: '/shopping',
-        pic: 'https://cdn.pixabay.com/photo/2019/04/26/07/14/store-4156934_640.png'
+        pic: 'https://images.pexels.com/photos/230544/pexels-photo-230544.jpeg?auto=compress&cs=tinysrgb&w=600'
     },
     {
         id: 3,
@@ -45,7 +45,7 @@ const products = [
         content: 'Maintain your day-to-day tasks or list everything that you have to do, with the most important tasks at the top of the list, and the least important tasks at the bottom.',
         action: 'Start Planning',
         route: '/planner',
-        pic: 'https://cdn.pixabay.com/photo/2015/10/21/10/27/calendar-999172_640.jpg'
+        pic: 'https://images.pexels.com/photos/811572/pexels-photo-811572.jpeg?auto=compress&cs=tinysrgb&w=600'
     },
 ];
 
