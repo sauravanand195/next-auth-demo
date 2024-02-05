@@ -15,9 +15,13 @@ import {
     Box,
     TextField,
     Snackbar,
+    Fab,
 } from '@mui/material';
 import { useRouter } from 'next/navigation';
 import Footer from './Footer';
+import AddProdPop from './addProdPop';
+import ModeEditSharpIcon from '@mui/icons-material/ModeEditSharp';
+import DeleteSharpIcon from '@mui/icons-material/DeleteSharp';
 
 const products = [
     {
@@ -93,7 +97,9 @@ const Landing = ({ session }) => {
     const router = useRouter();
     const parallaxRef = useRef(null);
     const parallaxRef2 = useRef(null);
-    const [cardImages, setCardImages] = useState([]);
+    const [openAddProd, setOpenAddProd] = useState(false)
+    const [selectedProd, setSelectedProd] = useState({})
+    // const [cardImages, setCardImages] = useState([]);
 
     // useEffect(() => {
     //     // Fetch random card images from Lorem Picsum
@@ -237,6 +243,11 @@ const Landing = ({ session }) => {
                 <Typography variant="h4" component="div" align="center" style={{ margin: '20px 0', fontWeight: 'bold' }}>
                     Discover the Excellence of Our Products
                 </Typography>
+                {session && session?.user?.email == 'saurav@anand.test' &&
+                    <Button fullWidth variant="contained" color="primary" sx={{ mb: 2 }} onClick={() => { setOpenAddProd(true) }}>
+                        Add New Product
+                    </Button>
+                }
                 <Grid container spacing={3}>
                     {products.map((product, index) => (
                         <Grid item xs={12} sm={6} md={4} key={product.id}>
@@ -270,10 +281,18 @@ const Landing = ({ session }) => {
                                     <Typography variant="body2" color="text.secondary" style={{ marginTop: '10px', flex: 1 }}>
                                         {product.content}
                                     </Typography>
-                                    <div style={{ marginTop: '10px' }}>
+                                    <div style={{ marginTop: '10px', display: "flex", justifyContent: "space-between" }}>
                                         <Button variant="contained" color="primary" onClick={() => { session && session?.user?.email ? router.push(product.route) : router.push('/auth/signin') }}>
                                             {product.action}
                                         </Button>
+                                        {session && session?.user?.email == 'saurav@anand.test' && <div>
+                                            <Fab size='small' sx={{ mr: 2 }} onClick={() => { setSelectedProd(product); setOpenAddProd(true) }}>
+                                                <ModeEditSharpIcon />
+                                            </Fab>
+                                            <Fab size='small' onClick={() => { handleDeleteProd(product.id) }}>
+                                                <DeleteSharpIcon />
+                                            </Fab>
+                                        </div>}
                                     </div>
                                 </CardContent>
                             </Card>
@@ -398,6 +417,7 @@ const Landing = ({ session }) => {
                 />
             </Container>
             <Footer />
+            {openAddProd && <AddProdPop open={openAddProd} setOpen={setOpenAddProd} selectedProd={selectedProd}/>}
         </div >
     );
 }
