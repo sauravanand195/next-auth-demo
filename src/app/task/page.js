@@ -5,6 +5,7 @@ const Demo = () => {
     const [ques, setQues] = useState({})
     const [service, setService] = useState('')
     const [cost, SetCost] = useState('')
+    // const [selection, setSelection] = useState([])
 
     useEffect(() => {
         const fetchData = async () => {
@@ -17,13 +18,18 @@ const Demo = () => {
     }, [])
 
     const updateDrp = (e) => {
+        // setSelection([...selection, e.target.value])
         setService(e.target.value)
         SetCost('')
     }
 
     const updateVal = (e) => {
-        SetCost(e.target.value)
+        const price = e.target.value && JSON.parse(e.target.value)?.service_offer_price
+        // e.target.value && setSelection([...selection, JSON.parse(e.target.value)?.service_name])
+        SetCost(price)
     }
+
+    // console.log('selection', selection);
 
     const renderQues = (dt) => {
         {
@@ -57,12 +63,11 @@ const Demo = () => {
                 <div key={key}>
                     <div>{key}</div>
                     <div>
-                        {/* Selected Answer :&nbsp; */}
                         <select onChange={(e) => updateVal(e)}>
                             <option value="">Please select an option</option>
                             {dt[key] && dt[key].map((value, index) => {
                                 // console.log('arr2', dt[val][value]);
-                                return <option key={index} value={value.service_offer_price}>{value.service_name}</option>
+                                return <option key={index} value={JSON.stringify(value)}>{value.service_name}</option>
                             })}
                         </select>
                     </div><br />
