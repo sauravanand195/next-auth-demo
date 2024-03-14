@@ -1,16 +1,17 @@
-"use client"
 import React, { useState } from 'react';
 import { useEffect } from 'react';
 
-const Index = () => {
+const Demo = () => {
     const days = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
-    const [weekSets, setWeekSets] = useState([{ id: 1, days: [] }]);
-    // const [weekSets, setWeekSets] = useState(() => {
-    //     if (typeof window !== 'undefined') {
-    //         const storedData = sessionStorage.getItem('selectedDataPerWeek')
-    //         return storedData ? JSON.parse(storedData) : [{ id: 1, days: [] }]
-    //     }
-    // });
+    // const [weekSets, setWeekSets] = useState([{ id: 1, days: [] }]);
+    const [weekSets, setWeekSets] = useState(() => {
+        if (typeof window !== 'undefined') {
+            const storedData = sessionStorage.getItem('selectedDataPerWeek')
+            return storedData ? JSON.parse(storedData) : [{ id: 1, days: [] }]
+        } else {
+            return [{ id: 1, days: [] }]
+        }
+    });
 
     const handleChange = (e, setId) => {
         const { name, checked } = e.target;
@@ -41,23 +42,25 @@ const Index = () => {
 
     return (
         <div>
-            {weekSets.map(weekSet => (
-                <div key={weekSet.id}>
-                    Week {weekSet.id}:
-                    {days.map((day, index) => (
-                        <span key={index}>
-                            <input
-                                type="checkbox"
-                                name={day}
-                                checked={weekSet.days[day]}
-                                // value={day}
-                                onChange={(e) => handleChange(e, weekSet.id)}
-                            />
-                            <label htmlFor={day}>{day}</label>
-                        </span>
-                    ))}
-                </div>
-            ))}
+            {weekSets?.map(weekSet => {
+                return (
+                    <div key={weekSet.id}>
+                        Week {weekSet.id}:
+                        {days.map((day, index) => (
+                            <span key={index}>
+                                <input
+                                    type="checkbox"
+                                    name={day}
+                                    checked={weekSet.days.includes(day)}
+                                    value={day}
+                                    onChange={(e) => handleChange(e, weekSet.id)}
+                                />
+                                <label htmlFor={day}>{day}</label>
+                            </span>
+                        ))}
+                    </div>
+                )
+            })}
             <div>
                 <button onClick={handleAddSet}>Add new set</button>
             </div>
@@ -68,5 +71,4 @@ const Index = () => {
         </div>
     );
 };
-
-export default Index;
+export default Demo;
