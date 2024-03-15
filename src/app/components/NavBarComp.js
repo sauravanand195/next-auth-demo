@@ -11,6 +11,7 @@ import GTranslateOutlinedIcon from '@mui/icons-material/GTranslateOutlined';
 import NotificationsActiveOutlinedIcon from '@mui/icons-material/NotificationsActiveOutlined';
 import PolicyOutlinedIcon from '@mui/icons-material/PolicyOutlined';
 import FeedbackOutlinedIcon from '@mui/icons-material/FeedbackOutlined';
+import QrCodeIcon from '@mui/icons-material/QrCode';
 
 const NavBarComp = ({ session }) => {
     const router = useRouter();
@@ -57,6 +58,7 @@ const NavBarComp = ({ session }) => {
                             // <Button sx={{ color: 'white', display: 'block' }}><b>{session?.user?.username}</b></Button>
                         }
                         <Box sx={{ flexGrow: 0 }}>
+
                             <Tooltip title="Open settings">
                                 <IconButton onClick={() => setOpenDrawer(true)} sx={{ p: 0 }}>
                                     {session ? <Avatar {...stringAvatar(session?.user?.username, '#1976d2', '17px')} /> : <Avatar />}
@@ -84,6 +86,9 @@ const NavBarComp = ({ session }) => {
                                         <Typography component="div" sx={{ fontSize: '20px' }}>
                                             {session ? session?.user?.email : 'N/A'}
                                         </Typography>
+                                        <div onClick={() => { router.push('/qrcode') }} style={{ display: 'flex', padding: "10px 0px" }}>
+                                            <div style={{ border: "2px solid #1976d2", borderRadius: "50%", padding: "10px 0", width: '50px', height: "50px", display: "flex", justifyContent: "center", alignItems: "center" }}><QrCodeIcon /></div>
+                                        </div>
                                     </div>
                                     <Avatar sx={{ width: "60px", height: "60px", backgroundColor: "#1976d2", fontSize: "22px" }}>{getAbbr(session?.user?.username)}</Avatar>
                                 </div>
