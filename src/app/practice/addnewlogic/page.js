@@ -1,17 +1,18 @@
+"use client"
 import React, { useState } from 'react';
 import { useEffect } from 'react';
 
 const Demo = () => {
     const days = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
-    // const [weekSets, setWeekSets] = useState([{ id: 1, days: [] }]);
-    const [weekSets, setWeekSets] = useState(() => {
-        if (typeof window !== 'undefined') {
-            const storedData = sessionStorage.getItem('selectedDataPerWeek')
-            return storedData ? JSON.parse(storedData) : [{ id: 1, days: [] }]
-        } else {
-            return [{ id: 1, days: [] }]
-        }
-    });
+    const [weekSets, setWeekSets] = useState([{ id: 1, days: [] }]);
+    // const [weekSets, setWeekSets] = useState(() => {
+    //     if (typeof window !== 'undefined') {
+    //         const storedData = sessionStorage.getItem('selectedDataPerWeek')
+    //         return storedData ? JSON.parse(storedData) : [{ id: 1, days: [] }]
+    //     } else {
+    //         return [{ id: 1, days: [] }]
+    //     }
+    // });
 
     const handleChange = (e, setId) => {
         const { name, checked } = e.target;
