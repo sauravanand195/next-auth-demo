@@ -1,12 +1,14 @@
 "use client"
-import { Button, FormControl, FormControlLabel, FormHelperText, FormLabel, Radio, RadioGroup } from "@mui/material";
+import React from "react";
+import { Button, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup } from "@mui/material";
 import moment from "moment";
 import { useState } from "react";
-import QRCode from "react-qr-code";
+import { QRCodeCanvas } from "qrcode.react";
 
 const Page = () => {
     const [selection, setSelection] = useState('')
     const [showQR, setShowQR] = useState(false)
+
     const tStamp = moment().format('D-M-YYYY H:m:s')
     const data = {
         "Saurav": {
@@ -31,6 +33,17 @@ const Page = () => {
         }
     }
 
+    const downloadQRCode = () => {
+        const canvas = document.getElementById('qrcode');
+        const pngUrl = canvas?.toDataURL("image/png").replace("image/png", "image/octet-stream");
+        let downloadLink = document.createElement("a");
+        downloadLink.href = pngUrl;
+        downloadLink.download = "QRCode.png";
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+        document.body.removeChild(downloadLink);
+    };
+
     const handleRadioChange = (event) => {
         setSelection(event.target.value)
     }
@@ -49,15 +62,15 @@ const Page = () => {
                         )
                     })}
                 </RadioGroup>
-                <Button sx={{ mt: 1, mr: 1 }} variant="outlined" onClick={() => { setShowQR(true) }}>
+                <Button sx={{ mt: 1, mr: 1 }} disabled={selection == ''} size="small" variant="contained" onClick={() => { setShowQR(true) }}>
                     View
                 </Button>
-                <Button sx={{ mt: 1, mr: 1 }} type="submit" variant="outlined">
+                <Button sx={{ mt: 1, mr: 1 }} disabled={selection == ''} size="small" variant="contained" onClick={downloadQRCode}>
                     Download
                 </Button>
             </FormControl>
             <div style={{ padding: "77px" }}>
-                {showQR && selection && <QRCode value={JSON.stringify(data[selection])} />}
+                {showQR && selection && <QRCodeCanvas bgColor={"#ffffff"} fgColor={"#000000"} includeMargin={true} id="qrcode" value={JSON.stringify(data[selection])} size={200} />}
             </div>
         </div>
     );
