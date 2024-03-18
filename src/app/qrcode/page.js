@@ -49,8 +49,8 @@ const Page = () => {
     }
 
     return (
-        <div>
-            <FormControl sx={{ m: 3 }} variant="standard">
+        <>
+            <FormControl fullWidth variant="standard" sx={{ p: 2 }}>
                 <FormLabel >Select any one to generate ...</FormLabel>
                 <RadioGroup
                     value={selection}
@@ -62,17 +62,17 @@ const Page = () => {
                         )
                     })}
                 </RadioGroup>
-                <Button sx={{ mt: 1, mr: 1 }} disabled={selection == ''} size="small" variant="contained" onClick={() => { setShowQR(true) }}>
+                <Button sx={{ mt: 1 }} disabled={selection == ''} size="small" variant="contained" onClick={() => { setShowQR(true) }}>
                     View
                 </Button>
-                <Button sx={{ mt: 1, mr: 1 }} disabled={selection == ''} size="small" variant="contained" onClick={downloadQRCode}>
+                <Button sx={{ mt: 1 }} disabled={selection == ''} size="small" variant="contained" onClick={downloadQRCode}>
                     Download
                 </Button>
             </FormControl>
-            <div style={{ padding: "77px" }}>
-                {showQR && selection && <QRCodeCanvas bgColor={"#ffffff"} fgColor={"#000000"} includeMargin={true} id="qrcode" value={JSON.stringify(data[selection])} size={200} />}
+            <div style={{ display: "flex", justifyContent: "center", paddingTop: "80px" }}>
+                {showQR && selection && <QRCodeCanvas bgColor={"#ffffff"} fgColor={"#000000"} includeMargin={true} id="qrcode" value={JSON.stringify(data[selection])} size={260} />}
             </div>
-        </div>
+        </>
     );
 }
 
