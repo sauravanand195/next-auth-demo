@@ -21,6 +21,7 @@ const Index = () => {
         const responseObj = await response.json()
         setTodoData(responseObj?.results)
     }
+    
 
     useEffect(() => {
         window.history.scrollRestoration = 'manual';
