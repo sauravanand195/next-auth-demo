@@ -1,6 +1,109 @@
 "use client"
 import { useEffect, useState } from "react"
 
+const dummyData = {
+    "question": [
+        {
+            "Type of service:": [
+                {
+                    "AC Repair": [
+                        {
+                            "Type of AC:": [
+                                {
+                                    "service_id": 203,
+                                    "service_name": "Split AC Repair",
+                                    "service_offer_price": 299
+                                },
+                                {
+                                    "service_id": 204,
+                                    "service_name": "Window AC Repair",
+                                    "service_offer_price": 299
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "AC Service": [
+                        {
+                            "Type of AC:": [
+                                {
+                                    "service_id": 201,
+                                    "service_name": "Split AC Service",
+                                    "service_offer_price": 599
+                                },
+                                {
+                                    "service_id": 202,
+                                    "service_name": "Window AC Service",
+                                    "service_offer_price": 499
+                                },
+                                {
+                                    "service_id": 209,
+                                    "service_name": "1 Split AC, 2 Services per year",
+                                    "service_offer_price": 1099
+                                },
+                                {
+                                    "service_id": 210,
+                                    "service_name": "1 Window AC, 2 Services per year",
+                                    "service_offer_price": 899
+                                },
+                                {
+                                    "service_id": 211,
+                                    "service_name": "1 Split AC, 3 Services per year",
+                                    "service_offer_price": 1699
+                                },
+                                {
+                                    "service_id": 212,
+                                    "service_name": "1 Window AC, 3 Services per year",
+                                    "service_offer_price": 1349
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "Installation / Un-Installation": [
+                        {
+                            "Type of AC:": [
+                                {
+                                    "service_id": 205,
+                                    "service_name": "Split AC Installation",
+                                    "service_offer_price": 1999
+                                },
+                                {
+                                    "service_id": 206,
+                                    "service_name": "Window AC Installation",
+                                    "service_offer_price": 799
+                                },
+                                {
+                                    "service_id": 207,
+                                    "service_name": "Split AC Un-Installation",
+                                    "service_offer_price": 649
+                                },
+                                {
+                                    "service_id": 208,
+                                    "service_name": "Window AC Un-Installation",
+                                    "service_offer_price": 399
+                                },
+                                {
+                                    "service_id": 213,
+                                    "service_name": "Split AC - Uninstallation + Installation",
+                                    "service_offer_price": 2599
+                                },
+                                {
+                                    "service_id": 214,
+                                    "service_name": "Window AC - Uninstallation + Installation",
+                                    "service_offer_price": 1249
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
+
 const Demo = () => {
     const [ques, setQues] = useState({})
     const [service, setService] = useState('')
@@ -9,9 +112,9 @@ const Demo = () => {
 
     useEffect(() => {
         const fetchData = async () => {
-            const response = await fetch('http://192.168.14.101:3000/web_services/serviceGuide?city=mumbai&seo_catname=ac-service&trace=')
-            const responseObject = await response.json()
-            let dataSet = responseObject?.results?.question[0]
+            // const response = await fetch('http://192.168.14.101:3000/web_services/serviceGuide?city=mumbai&seo_catname=ac-service&trace=')
+            // const responseObject = await response.json()
+            let dataSet = dummyData?.question[0]
             setQues(dataSet)
         }
         fetchData()
