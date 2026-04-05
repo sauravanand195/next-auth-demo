@@ -12,6 +12,7 @@ import NotificationsActiveOutlinedIcon from '@mui/icons-material/NotificationsAc
 import PolicyOutlinedIcon from '@mui/icons-material/PolicyOutlined';
 import FeedbackOutlinedIcon from '@mui/icons-material/FeedbackOutlined';
 import QrCodeIcon from '@mui/icons-material/QrCode';
+import ChatOutlinedIcon from '@mui/icons-material/ChatOutlined';
 
 const NavBarComp = ({ session }) => {
     const router = useRouter();
@@ -89,6 +90,16 @@ const NavBarComp = ({ session }) => {
                                         <div onClick={() => { router.push('/qrcode') }} style={{ display: 'flex', padding: "10px 0px" }}>
                                             <div style={{ border: "2px solid #1976d2", borderRadius: "50%", padding: "10px 0", width: '50px', height: "50px", display: "flex", justifyContent: "center", alignItems: "center" }}><QrCodeIcon /></div>
                                         </div>
+                                        <IconButton
+                                            onClick={() => router.push('/chatbot')}
+                                            sx={{
+                                                ml: 1,
+                                                backgroundColor: '#e3f2fd',
+                                                '&:hover': { backgroundColor: '#bbdefb' }
+                                            }}
+                                        >
+                                            <ChatOutlinedIcon sx={{ color: '#1976d2' }} />
+                                        </IconButton>
                                     </div>
                                     <Avatar sx={{ width: "60px", height: "60px", backgroundColor: "#1976d2", fontSize: "22px" }}>{getAbbr(session?.user?.username)}</Avatar>
                                 </div>
